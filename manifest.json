@@ -1,0 +1,19 @@
+{
+
+  "manifest_version": 2,
+  "name": "Do it",
+  "version": "1.0",
+
+  "description": "To-Do list with reminders and grouping.",
+
+  "icons": {
+    "48": "assets/icons/icon-48.png"
+  },
+
+  "browser_action": {
+    "default_icon": "assets/icons/icon-48.png",
+    "default_title": "Do it",
+    "default_popup": "app.html"
+  }
+
+}
