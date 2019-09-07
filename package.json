@@ -28,5 +28,8 @@
     "sass-loader": "^7.3.1",
     "vue": "^2.6.10",
     "vue-template-compiler": "^2.6.10"
+  },
+  "dependencies": {
+    "idb": "^4.0.4"
   }
 }

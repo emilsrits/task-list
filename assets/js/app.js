@@ -1,14 +1,14 @@
+require('./bootstrap.js');
+
 import Vue from 'vue';
 import App from './components/App.vue';
 
-const app = new Vue({
-    el: '#app',
+Vue.config.productionTip = false;
 
+const app = new Vue({
     components: {
         App
     },
     
-    render(h) {
-        return h('app');
-    }
-});
+    render: h => h(App)
+}).$mount('#app');

@@ -14,6 +14,8 @@
     "default_icon": "assets/icons/icon-48.png",
     "default_title": "Do it",
     "default_popup": "app.html"
-  }
+  },
+
+  "permissions": ["unlimitedStorage"]
 
 }
