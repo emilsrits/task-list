@@ -1,44 +1,32 @@
 <template>
     <div class="container">
-        <todo-list
-            :todos="todos"/>
+        <component
+            :is="currentTab"
+        ></component>
     </div>
 </template>
 
 <script>
-import TodoList from './Todo/TodoList.vue';
+import TaskList from './Task/TaskList.vue';
 
 export default {
     name: 'App',
 
-    components: {
-        TodoList
+    data () {
+        return {
+            currentTab: TaskList
+        }
     },
 
-    computed: {
-        todos() {
-            return {
-                task1: {
-                    title: 'Task 1'
-                },
-                task2: {
-                    title: 'Task 2'
-                },
-                task3: {
-                    title: 'Task 3'
-                },
-                task4: {
-                    title: 'Task 4'
-                }
-            }
-        }
+    mounted () {
+        this.$store.dispatch('setTaskList');
     }
 }
 </script>
 
 <style lang="scss" scoped>
 .container {
-    padding: 15px;
+    padding: 20px;
     min-width: 300px;
 }
 </style>
