@@ -26,6 +26,10 @@ const mutations = {
     ADD_TASK(state, payload) {
         state.tasks.unshift(payload);
     },
+
+    DELETE_TASK(state, payload) {
+        state.tasks.splice(state.tasks.findIndex(i => i.id == payload), 1);
+    }
 };
 
 const actions = {
@@ -60,6 +64,20 @@ const actions = {
             })
             .then(task => {
                 context.commit('ADD_TASK', task);
+            });
+    },
+
+    updateTask(context, task) {
+        db.updateTask(task);
+    },
+
+    deleteTask(context, task) {
+        db.deleteTask(task)
+            .then(() => {
+                context.commit('DELETE_TASK', task);
+            })
+            .catch(error => {
+                console.error(error);
             });
     }
 };

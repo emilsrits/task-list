@@ -8,8 +8,8 @@
         </div>
 
         <div>
-            <ul v-for="(task, i) in localTasks" :key="i">
-                <li>
+            <ul>
+                <li v-for="(task, i) in localTasks" :key="i">
                     <task-list-item
                         :task="task"/>
                 </li>
@@ -19,8 +19,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
 import TaskListItem from './TaskListItem.vue';
 
 export default {
@@ -50,6 +48,8 @@ export default {
 
                 this.$store.dispatch('addTask', task);
             }
+
+            el.elements.title.value = null;
         }
     },
 
@@ -75,10 +75,13 @@ export default {
     justify-content: flex-start;
     align-items: center;
     flex-direction: row;
+    padding: 5px;
+    background-color: rgba(20, 150, 90, 0.3);
 
     .task-title-input {
-        margin-right: 10px;
+        margin-right: 5px;
         padding: 8px;
+        width: 100%;
     }
 
     .button-add {
@@ -93,6 +96,7 @@ ul {
 
 li {
     display: block;
+    margin: 5px 0;
     padding: 5px 0;
 }
 </style>

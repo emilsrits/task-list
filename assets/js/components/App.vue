@@ -27,6 +27,7 @@ export default {
 <style lang="scss" scoped>
 .container {
     padding: 20px;
-    min-width: 300px;
+    min-width: 320px;
+    max-width: 320px;
 }
 </style>

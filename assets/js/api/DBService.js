@@ -10,7 +10,7 @@ let db = new Dexie(DB_NAME, {
 
 db.version(DB_VERSION).stores({
     projects: '++id, title',
-    tasks: '++id, title, projectId -> projects.id, description, date, done'
+    tasks: '++id, title, projectId -> projects.id'
 });
 
 const getAllProjects = async () => {
@@ -53,13 +53,19 @@ const addTask = async ({ title, projectId = null, done = false }) => {
     return task;
 };
 
-const updateTask = async (id, { title, description, date, done }) => {
+const updateTask = async ({id, title, description, date, done }) => {
     let task = await db.tasks.update(id, {
         title: title,
         description: description,
         date: date,
         done: done
     })
+
+    return task;
+};
+
+const deleteTask = async (id) => {
+    let task = await db.tasks.delete(Number(id));
 
     return task;
 };
@@ -71,5 +77,6 @@ export default {
     getAllTasks,
     getTask,
     addTask,
-    updateTask
+    updateTask,
+    deleteTask
 }
