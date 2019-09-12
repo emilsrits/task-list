@@ -1,10 +1,10 @@
 @font-face {
   font-family: '#{$icomoon-font-family}';
-  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?t4pzui');
-  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?t4pzui#iefix') format('embedded-opentype'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?t4pzui') format('truetype'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?t4pzui') format('woff'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?t4pzui##{$icomoon-font-family}') format('svg');
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?vjvl4c');
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?vjvl4c#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?vjvl4c') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?vjvl4c') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?vjvl4c##{$icomoon-font-family}') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -34,6 +34,16 @@
     content: $icon-clock; 
   }
 }
+.icon-floppy-disk {
+  &:before {
+    content: $icon-floppy-disk; 
+  }
+}
+.icon-undo2 {
+  &:before {
+    content: $icon-undo2; 
+  }
+}
 .icon-plus {
   &:before {
     content: $icon-plus; 
@@ -54,4 +64,3 @@
     content: $icon-checkmark; 
   }
 }
-

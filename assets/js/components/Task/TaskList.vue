@@ -30,7 +30,7 @@ export default {
 
     data () {
         return {
-            localTasks: null
+            localTasks: this.$store.state.tasks
         }
     },
 
@@ -39,10 +39,10 @@ export default {
             event.preventDefault();
 
             let el = event.target;
-            let title = el.elements.title.value;
 
+            let title = el.elements.title.value;
             if (title || title.length !== 0) {
-                    let task = {
+                let task = {
                     title: el.elements.title.value
                 }
 
@@ -55,11 +55,7 @@ export default {
 
     mounted () {
         this.$store.subscribe((mutation, state) => {
-            if (mutation.type === 'SET_TASK_LIST') {
-                this.localTasks = state.tasks;
-            }
-
-            if (mutation.type === 'ADD_TASK') {
+            if (mutation.type === 'SET_TASK_LIST' || mutation.type === 'ADD_TASK') {
                 this.localTasks = state.tasks;
             }
         });

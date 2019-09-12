@@ -8,6 +8,7 @@
 
 <script>
 import TaskList from './Task/TaskList.vue';
+import TaskEdit from './Task/TaskEdit.vue';
 
 export default {
     name: 'App',
@@ -20,6 +21,16 @@ export default {
 
     mounted () {
         this.$store.dispatch('setTaskList');
+
+        this.$store.subscribe((mutation, state) => {
+            if (mutation.type === 'OPEN_TASK_EDIT') {
+                this.currentTab = TaskEdit;
+            }
+
+            if (mutation.type === 'OPEN_TASK_LIST') {
+                this.currentTab = TaskList;
+            }
+        });
     }
 }
 </script>

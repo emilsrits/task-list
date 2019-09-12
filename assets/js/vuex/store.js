@@ -7,7 +7,8 @@ Vue.use(Vuex);
 
 const state = {
     projects: [],
-    tasks: []
+    tasks: [],
+    currentTask: null
 };
 
 const mutations = {
@@ -29,6 +30,14 @@ const mutations = {
 
     DELETE_TASK(state, payload) {
         state.tasks.splice(state.tasks.findIndex(i => i.id == payload), 1);
+    },
+
+    OPEN_TASK_EDIT(state, payload) {
+        state.currentTask = payload;
+    },
+
+    OPEN_TASK_LIST(state) {
+        state.currentTask = null;
     }
 };
 
@@ -79,6 +88,14 @@ const actions = {
             .catch(error => {
                 console.error(error);
             });
+    },
+
+    openTaskEdit(context, task) {
+        context.commit('OPEN_TASK_EDIT', task);
+    },
+
+    openTaskList(context) {
+        context.commit('OPEN_TASK_LIST');
     }
 };
 

@@ -7,7 +7,7 @@
                 <transition name="slide-fade">
                     <div v-if="showActions">
                         <button class="icon-checkmark button button-check" @click="handleTaskCheck"></button>
-                        <button class="icon-pencil2 button button-edit"></button>
+                        <button class="icon-pencil2 button button-edit" @click="handleTaskEdit"></button>
                         <button class="icon-minus button button-delete" @click="handleTaskDelete"></button>
                     </div>
                 </transition>
@@ -36,6 +36,10 @@ export default {
             this.$store.dispatch('updateTask', this.task);
         },
 
+        handleTaskEdit(event) {
+            this.$store.dispatch('openTaskEdit', this.task);
+        },
+
         handleTaskDelete(event) {
             this.$store.dispatch('deleteTask', this.task.id);
         }
@@ -48,6 +52,7 @@ export default {
 
 .item {
     padding: 5px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.6);
     transition: opacity 0.3s ease;
 }
 
