@@ -6,13 +6,19 @@
             <div class="task-actions">
                 <transition name="slide-fade">
                     <div v-if="showActions">
-                        <button class="icon-checkmark button button-check" @click="handleTaskCheck"></button>
-                        <button class="icon-pencil2 button button-edit" @click="handleTaskEdit"></button>
-                        <button class="icon-minus button button-delete" @click="handleTaskDelete"></button>
+                        <button class="icon-checkmark button button-check" type="button" @click="handleTaskCheck"></button>
+                        <button class="icon-pencil2 button button-edit" type="button" @click="handleTaskEdit"></button>
+                        <button class="icon-minus button button-delete" type="button" @click="handleTaskDelete"></button>
                     </div>
                 </transition>
             </div>
         </div>
+
+        <p :class="[{ 'task-due': dateDifference < 2 }, 'task-date']" v-if="task.date && !task.done">
+            <span class="icon-clock"></span>
+            {{ dateFormatted }}
+        </p>
+
         <p v-if="task.description">{{ task.description }}</p>
     </div>
 </template>
@@ -26,6 +32,21 @@ export default {
     data () {
         return {
             showActions: false
+        }
+    },
+
+    computed: {
+        dateFormatted() {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            let date = new Date(this.task.date);
+
+            return date.toLocaleDateString('en-US', options);
+        },
+
+        dateDifference() {
+            let today = new Date();
+            let due = new Date(this.task.date);
+            return parseInt((due - today) / (1000 * 60 * 60 * 24), 10); 
         }
     },
 
@@ -73,6 +94,19 @@ export default {
 
 h4 {
     width: 100%;
+}
+
+.task-date {
+    padding: 5px 0;
+    font-size: 0.7em;
+
+    > span {
+        padding-right: 5px;
+    }
+}
+
+.task-due {
+    color: $color-red;
 }
 
 .task-actions {

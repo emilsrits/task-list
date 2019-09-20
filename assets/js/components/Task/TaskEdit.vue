@@ -1,10 +1,16 @@
 <template>
     <form @submit="handleTaskUpdate">
+        <span class="label">Title</span>
         <input type="text" name="title" :value="task.title">
-        <textarea name="description" cols="10" :value="task.description"></textarea>
+
+        <span class="label">Date</span>
+        <input type="date" name="date" :value="task.date" :min="minDate">
+
+        <span class="label">Description</span>
+        <textarea name="description" cols="10" rows="5" :value="task.description"></textarea>
 
         <div class="form-action">
-            <button class="icon-undo2 button button-edit" @click="handleShowTasks"></button>
+            <button class="icon-undo2 button button-edit" type="button" @click="handleShowTasks"></button>
             <button class="icon-floppy-disk button button-add" type="submit"></button>
         </div>
     </form>
@@ -17,6 +23,12 @@ export default {
     data () {
         return {
             task: this.$store.state.currentTask
+        }
+    },
+
+    computed: {
+        minDate() {
+            return new Date().toISOString().split("T")[0];
         }
     },
 
@@ -35,6 +47,8 @@ export default {
                 this.task.title = title;
             }
 
+            this.task.date = el.elements.date.value;
+
             this.task.description = el.elements.description.value;
 
             this.$store.dispatch('updateTask', this.task);
@@ -44,6 +58,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../../sass/variables.scss";
+
 form > * {
     margin: 0 0 10px;
     width: 100%;
@@ -51,6 +67,12 @@ form > * {
 
 textarea {
     resize: vertical;
+}
+
+.label {
+    color: $color-gray-darker;
+    font-size: 0.8em;
+    vertical-align: super;
 }
 
 .form-action {
