@@ -1,6 +1,6 @@
 {
 
-  "name": "Do it",
+  "name": "Task list",
   "version": "1.0",
   "description": "Task list with reminders",
   "manifest_version": 2,
@@ -11,7 +11,7 @@
 
   "browser_action": {
     "default_icon": "assets/icons/icon-48.png",
-    "default_title": "Do it",
+    "default_title": "Task list",
     "default_popup": "app.html"
   },
 
