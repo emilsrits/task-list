@@ -1,10 +1,9 @@
 {
 
-  "manifest_version": 2,
   "name": "Do it",
   "version": "1.0",
-
-  "description": "To-Do list with reminders and grouping.",
+  "description": "Task list with reminders",
+  "manifest_version": 2,
 
   "icons": {
     "48": "assets/icons/icon-48.png"
@@ -16,7 +15,7 @@
     "default_popup": "app.html"
   },
 
-  "permissions": ["unlimitedStorage", "history"],
+  "permissions": ["storage", "unlimitedStorage", "history"],
 
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self';"
 
