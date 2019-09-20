@@ -1,25 +1,16 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import db from './../api/DBService.js';
+import {default as db} from './../api/DBService.js';
 
 Vue.use(Vuex);
 
 const state = {
-    projects: [],
     tasks: [],
     currentTask: null
 };
 
 const mutations = {
-    SET_PROJECT_LIST(state, payload) {
-        state.projects = payload;
-    },
-
-    ADD_PROJECT(state, payload) {
-        state.projects.unshift(payload);
-    },
-
     SET_TASK_LIST(state, payload) {
         state.tasks = payload;
     },
@@ -42,23 +33,6 @@ const mutations = {
 };
 
 const actions = {
-    setProjectList(context) {
-        db.getAllProjects()
-            .then(projects => {
-                context.commit('SET_PROJECT_LIST', projects);
-            });
-    },
-
-    addProject(context, project) {
-        db.addProject(project)
-            .then(projectId => {
-                return db.getProject(projectId);
-            })
-            .then(project => {
-                context.commit('ADD_PROJECT', project);
-            });
-    },
-
     setTaskList(context) {
         db.getAllTasks()
             .then(tasks => {

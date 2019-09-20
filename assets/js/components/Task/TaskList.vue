@@ -2,7 +2,7 @@
     <div>
         <div class="task-panel">
             <form @submit="handleTaskSubmit">
-                <input class="task-title-input" type="text" name="title">
+                <input class="task-title-input" type="text" name="title" autocomplete="off">
                 <button class="icon-plus button button-add" type="submit"></button>
             </form>
         </div>

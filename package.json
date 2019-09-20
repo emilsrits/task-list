@@ -22,8 +22,7 @@
   "homepage": "https://github.com/emilsrits/doit#readme",
   "devDependencies": {
     "cross-env": "^5.2.1",
-    "dexie": "^2.0.4",
-    "dexie-relationships": "^1.2.10",
+    "idb": "^4.0.4",
     "laravel-mix": "^4.1.2",
     "normalize.css": "^8.0.1",
     "resolve-url-loader": "^3.1.0",

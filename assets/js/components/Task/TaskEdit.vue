@@ -1,7 +1,7 @@
 <template>
     <form @submit="handleTaskUpdate">
         <span class="label">Title</span>
-        <input type="text" name="title" :value="task.title">
+        <input type="text" name="title" :value="task.title" autocomplete="off">
 
         <span class="label">Date</span>
         <input type="date" name="date" :value="task.date" :min="minDate">

@@ -1,79 +1,68 @@
-import Dexie from 'dexie';
-import Relationships from 'dexie-relationships';
+import { openDB } from 'idb';
 
 const DB_NAME = 'taskDB';
 const DB_VERSION = 1;
+const DB_STORE_TASKS = 'tasks';
 
-let db = new Dexie(DB_NAME, {
-    addons: [Relationships]
-});
+async function getDb() {
+    const db = await openDB(DB_NAME, DB_VERSION, {
+        upgrade(db) {
+            const store = db.createObjectStore(DB_STORE_TASKS, {
+                keyPath: 'id',
+                autoIncrement: true,
+            });
 
-db.version(DB_VERSION).stores({
-    projects: '++id, title',
-    tasks: '++id, title, projectId -> projects.id'
-});
-
-const getAllProjects = async () => {
-    let projects = await db.projects.with({ tasks: 'tasks' });
-    return projects;
-};
-
-const getProject = async (id) => {
-    let project = await db.projects.where('id').equals(id).first();
-
-    return project;
-};
-
-const addProject = async ({ title }) => {
-    let project = await db.projects.add({
-        title: title
+            store.createIndex('title', 'title');
+        }
     });
-
-    return project;
+    return db;
 };
 
 const getAllTasks = async () => {
-    let tasks = await db.tasks.orderBy('id').reverse().toArray();
+    const db = await getDb();
+    const tasks = await db.getAll(DB_STORE_TASKS);
+    
     return tasks;
 };
 
 const getTask = async (id) => {
-    let task = await db.tasks.where('id').equals(id).first();
+    const db = await getDb();
+    let task = await db.get(DB_STORE_TASKS, id);
 
     return task;
 };
 
-const addTask = async ({ title, projectId = null, done = false }) => {
-    let task = await db.tasks.add({
-        title: title,
-        projectId: projectId,
-        done: done
+const addTask = async ({ title, done = false }) => {
+    const db = await getDb();
+    let task = await db.add(DB_STORE_TASKS, {
+        title,
+        done
     });
     
     return task;
 };
 
 const updateTask = async ({id, title, description, date, done }) => {
-    let task = await db.tasks.update(id, {
-        title: title,
-        description: description,
-        date: date,
-        done: done
+    const db = await getDb();
+    let task = await db.put(DB_STORE_TASKS, {
+        id,
+        title,
+        description,
+        date,
+        done
     })
 
     return task;
 };
 
 const deleteTask = async (id) => {
-    let task = await db.tasks.delete(Number(id));
+    const db = await getDb();
+    let task = await db.delete(DB_STORE_TASKS, Number(id));
 
     return task;
 };
 
 export default {
-    getAllProjects,
-    getProject,
-    addProject,
     getAllTasks,
     getTask,
     addTask,
