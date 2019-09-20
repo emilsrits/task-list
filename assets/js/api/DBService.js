@@ -20,7 +20,8 @@ async function getDb() {
 
 const getAllTasks = async () => {
     const db = await getDb();
-    const tasks = await db.getAll(DB_STORE_TASKS);
+    let tasks = await db.getAll(DB_STORE_TASKS);
+    tasks = tasks.reverse();
     
     return tasks;
 };
