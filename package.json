@@ -1,5 +1,5 @@
 {
-  "name": "doit",
+  "name": "task-list",
   "version": "1.0.0",
   "description": "To-Do list with reminders and grouping.",
   "main": "app.js",
@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/emilsrits/doit.git"
+    "url": "git+https://github.com/emilsrits/task-list.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/emilsrits/doit/issues"
+    "url": "https://github.com/emilsrits/task-list/issues"
   },
-  "homepage": "https://github.com/emilsrits/doit#readme",
+  "homepage": "https://github.com/emilsrits/task-list#readme",
   "devDependencies": {
     "cross-env": "^5.2.1",
     "idb": "^4.0.4",

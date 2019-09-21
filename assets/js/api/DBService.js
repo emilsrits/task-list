@@ -7,12 +7,14 @@ const DB_STORE_TASKS = 'tasks';
 async function getDb() {
     const db = await openDB(DB_NAME, DB_VERSION, {
         upgrade(db) {
-            const store = db.createObjectStore(DB_STORE_TASKS, {
-                keyPath: 'id',
-                autoIncrement: true,
-            });
-
-            store.createIndex('title', 'title');
+            if (!db.objectStoreNames.contains(DB_STORE_TASKS)) {
+                const store = db.createObjectStore(DB_STORE_TASKS, {
+                    keyPath: 'id',
+                    autoIncrement: true,
+                });
+    
+                store.createIndex('title', 'title');
+            }
         }
     });
     return db;
