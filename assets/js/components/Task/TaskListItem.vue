@@ -1,7 +1,7 @@
 <template>
     <div :class="['item', { 'task-done': task.done }]" @mouseenter="showActions = true" @mouseleave="showActions = false">
         <div class="item-header">
-            <h4>{{ task.title }}</h4>
+            <h4 class="task-title">{{ task.title }}</h4>
 
             <div class="task-actions">
                 <transition name="slide-fade">
@@ -19,7 +19,7 @@
             {{ dateFormatted }}
         </p>
 
-        <p v-if="task.description">{{ task.description }}</p>
+        <p class="task-description" v-if="task.description">{{ task.description }}</p>
     </div>
 </template>
 
@@ -46,6 +46,7 @@ export default {
         dateDifference() {
             let today = new Date();
             let due = new Date(this.task.date);
+            
             return parseInt((due - today) / (1000 * 60 * 60 * 24), 10); 
         }
     },
@@ -77,22 +78,27 @@ export default {
     transition: opacity 0.3s ease;
 }
 
-.task-done {
-    opacity: 0.5;
-
-    h4, p {
-        text-decoration: line-through;
-    }
-}
-
 .item-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     flex-direction: row;
+
+    .task-actions {
+        margin-left: 5px;
+        width: 120px;
+        text-align: right;
+
+        .button {
+            padding: 4px;
+            font-size: 10px;
+        }
+
+    }
+    
 }
 
-h4 {
+.task-title {
     width: 100%;
 }
 
@@ -103,21 +109,20 @@ h4 {
     > span {
         padding-right: 5px;
     }
+
 }
 
 .task-due {
     color: $color-red;
 }
 
-.task-actions {
-    margin-left: 5px;
-    width: 120px;
-    text-align: right;
+.task-done {
 
-    .button-check, .button-edit, .button-delete {
-        padding: 4px;
-        font-size: 10px;
+    .task-title, .task-description {
+        opacity: 0.5;
+        text-decoration: line-through;
     }
+
 }
 
 .slide-fade-enter-active {

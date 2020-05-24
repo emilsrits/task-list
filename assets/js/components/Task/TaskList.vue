@@ -76,13 +76,20 @@ export default {
 
     .task-title-input {
         margin-right: 5px;
-        padding: 8px;
+        padding: 4px 8px;
         width: 100%;
+        height: 22px;
+
+        &:focus {
+            outline: $color-black solid 2px;
+        }
+
     }
 
     .button-add {
         padding: 8px;
     }
+
 }
 
 ul {

@@ -17,6 +17,7 @@ async function getDb() {
             }
         }
     });
+    
     return db;
 };
 

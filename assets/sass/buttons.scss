@@ -1,26 +1,29 @@
 .button {
-  color: $color-white;
-  font-size: 12px;
-  border: 2px solid transparent;
-  box-shadow: $box-shadow-inset $color-gray;
-  cursor: pointer;
-  &:hover {
-      box-shadow: $box-shadow-inset $color-gray-darker;
-  }
+    color: $color-white;
+    font-size: 12px;
+    border: 2px solid transparent;
+    outline: none;
+    box-shadow: $box-shadow-inset $color-gray;
+    cursor: pointer;
+
+    &:hover {
+        box-shadow: $box-shadow-inset $color-gray-darker;
+    }
+    
 }
 
 .button-check {
-  background-color: $color-yellow;
+    background-color: $color-yellow;
 }
 
 .button-add {
-  background-color: $color-green;
+    background-color: $color-green;
 }
 
 .button-edit {
-  background-color: $color-blue;
+    background-color: $color-blue;
 }
 
 .button-delete {
-  background-color: $color-red;
+    background-color: $color-red;
 }

@@ -43,6 +43,7 @@ export default {
             let el = event.target;
 
             let title = el.elements.title.value;
+
             if (title || title.length !== 0) {
                 this.task.title = title;
             }
@@ -85,5 +86,6 @@ textarea {
         padding: 8px;
         margin-left: 10px;
     }
+    
 }
 </style>
