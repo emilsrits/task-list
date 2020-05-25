@@ -2,18 +2,29 @@
     <div>
         <div class="task-panel">
             <form @submit="handleTaskSubmit">
-                <input class="task-title-input" type="text" name="title" autocomplete="off">
-                <button class="icon-plus button button-add" type="submit"></button>
+                <input 
+                    class="task-title-input" 
+                    type="text" 
+                    name="title" 
+                    autocomplete="off"
+                >
+                <button 
+                    class="icon-plus button button-add" 
+                    type="submit"
+                >
+                </button>
             </form>
         </div>
 
         <div>
-            <ul>
-                <li v-for="(task, i) in localTasks" :key="i">
-                    <task-list-item
-                        :task="task"/>
+            <draggable :element="ul">
+                <li 
+                    v-for="(task, i) in localTasks" 
+                    :key="i"
+                >
+                    <task-list-item :task="task"/>
                 </li>
-            </ul>
+            </draggable>
         </div>
     </div>
 </template>

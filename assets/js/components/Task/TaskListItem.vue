@@ -1,25 +1,49 @@
 <template>
-    <div :class="['item', { 'task-done': task.done }]" @mouseenter="showActions = true" @mouseleave="showActions = false">
+    <div 
+        :class="['item', { 'task-done': task.done }]" 
+        @mouseenter="showActions = true" 
+        @mouseleave="showActions = false"
+    >
         <div class="item-header">
             <h4 class="task-title">{{ task.title }}</h4>
 
             <div class="task-actions">
                 <transition name="slide-fade">
                     <div v-if="showActions">
-                        <button class="icon-checkmark button button-check" type="button" @click="handleTaskCheck"></button>
-                        <button class="icon-pencil2 button button-edit" type="button" @click="handleTaskEdit"></button>
-                        <button class="icon-minus button button-delete" type="button" @click="handleTaskDelete"></button>
+                        <button 
+                            class="icon-checkmark button button-check" 
+                            type="button" 
+                            @click="handleTaskCheck"
+                        ></button>
+                        <button 
+                            class="icon-pencil2 button button-edit" 
+                            type="button" 
+                            @click="handleTaskEdit"
+                        ></button>
+                        <button 
+                            class="icon-minus button button-delete" 
+                            type="button" 
+                            @click="handleTaskDelete"
+                        ></button>
                     </div>
                 </transition>
             </div>
         </div>
 
-        <p :class="[{ 'task-due': dateDifference < 2 }, 'task-date']" v-if="task.date && !task.done">
+        <p 
+            :class="[{ 'task-due': isTaskDue }, 'task-date']" 
+            v-if="task.date && !task.done"
+        >
             <span class="icon-clock"></span>
             {{ dateFormatted }}
         </p>
 
-        <p class="task-description" v-if="task.description">{{ task.description }}</p>
+        <p 
+            class="task-description" 
+            v-if="task.description"
+        >
+            {{ task.description }}
+        </p>
     </div>
 </template>
 
@@ -47,7 +71,11 @@ export default {
             let today = new Date();
             let due = new Date(this.task.date);
             
-            return parseInt((due - today) / (1000 * 60 * 60 * 24), 10); 
+            return parseInt((due - today) / (1000 * 60 * 60 * 24), 10);
+        },
+
+        isTaskDue() {
+            return this.dateDifference < 2;
         }
     },
 

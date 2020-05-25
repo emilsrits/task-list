@@ -1,8 +1,6 @@
 <template>
     <div class="container">
-        <component
-            :is="currentTab"
-        ></component>
+        <component :is="currentTab"></component>
     </div>
 </template>
 
