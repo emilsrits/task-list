@@ -17,14 +17,14 @@
         </div>
 
         <div>
-            <draggable :element="ul">
+            <ul>
                 <li 
                     v-for="(task, i) in localTasks" 
                     :key="i"
                 >
                     <task-list-item :task="task"/>
                 </li>
-            </draggable>
+            </ul>
         </div>
     </div>
 </template>
