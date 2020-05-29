@@ -17,31 +17,49 @@
         </div>
 
         <div>
-            <ul>
+            <draggable 
+                tag="ul" 
+                :list="localTasks" 
+                v-bind="getDragOptions"
+                @change="handleTaskListOrderChange"
+            >
                 <li 
                     v-for="(task, i) in localTasks" 
                     :key="i"
                 >
                     <task-list-item :task="task"/>
                 </li>
-            </ul>
+            </draggable>
         </div>
     </div>
 </template>
 
 <script>
+import draggable from 'vuedraggable';
 import TaskListItem from './TaskListItem.vue';
 
 export default {
     name: 'TaskList',
 
     components: {
+        draggable,
         TaskListItem
     },
 
     data () {
         return {
             localTasks: this.$store.state.tasks
+        }
+    },
+
+    computed: {
+        getDragOptions() {
+            return {
+                animation: 0,
+                disabled: false,
+                ghostClass: 'ghost',
+                handle: '.handle'
+            }
         }
     },
 
@@ -61,7 +79,11 @@ export default {
             }
 
             el.elements.title.value = null;
-        }
+        },
+
+        handleTaskListOrderChange() {
+            this.$store.dispatch('updateTaskListOrder');
+        },
     },
 
     mounted () {
@@ -110,7 +132,10 @@ ul {
 
 li {
     display: block;
-    margin: 5px 0;
-    padding: 5px 0;
+    margin: 5px 0 0;
+}
+
+.ghost {
+    opacity: 0.5;
 }
 </style>

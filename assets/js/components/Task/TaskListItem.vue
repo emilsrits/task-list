@@ -1,8 +1,8 @@
 <template>
     <div 
         :class="['item', { 'task-done': task.done }]" 
-        @mouseenter="showActions = true" 
-        @mouseleave="showActions = false"
+        @mouseenter="handleMouseEnter" 
+        @mouseleave="handleMouseLeave"
     >
         <div class="item-header">
             <h4 class="task-title">{{ task.title }}</h4>
@@ -44,6 +44,12 @@
         >
             {{ task.description }}
         </p>
+
+        <div :class="[{ 'is-visible': showHandle }, 'handle']">
+            <span>&#8901;</span>
+            <span>&#8901;</span>
+            <span>&#8901;</span>
+        </div>
     </div>
 </template>
 
@@ -55,7 +61,8 @@ export default {
 
     data () {
         return {
-            showActions: false
+            showActions: false,
+            showHandle: false,
         }
     },
 
@@ -80,6 +87,16 @@ export default {
     },
 
     methods: {
+        handleMouseEnter() {
+            this.showActions = true;
+            this.showHandle = true;
+        },
+
+        handleMouseLeave() {
+            this.showActions = false;
+            this.showHandle = false;
+        },
+
         handleTaskCheck(event) {
             this.task.done = !this.task.done;
 
@@ -101,7 +118,8 @@ export default {
 @import "../../../sass/variables.scss";
 
 .item {
-    padding: 5px 0;
+    position: relative;
+    padding: 2px 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.6);
     transition: opacity 0.3s ease;
 }
@@ -157,6 +175,26 @@ export default {
     .task-description {
         text-decoration: line-through;
         opacity: 0.5;
+    }
+
+}
+
+.handle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 80px;
+    height: 10px;
+    transition: opacity 0.3s ease;
+    cursor: grab;
+
+    &:not(.is-visible) {
+        opacity: 0;
+    }
+
+    span {
+        line-height: 10px;
     }
 
 }

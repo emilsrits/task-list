@@ -20,7 +20,10 @@ const mutations = {
     },
 
     DELETE_TASK(state, payload) {
-        state.tasks.splice(state.tasks.findIndex(i => i.id == payload), 1);
+        state.tasks.splice(
+            state.tasks.findIndex(i => i.id == payload), 
+            1
+        );
     },
 
     OPEN_TASK_EDIT(state, payload) {
@@ -29,6 +32,13 @@ const mutations = {
 
     OPEN_TASK_LIST(state) {
         state.currentTask = null;
+    },
+
+    UPDATE_TASK_LIST_ORDER(state) {
+        state.tasks.map((task, index) => {
+            task.order = index + 1;
+            db.updateTask(task);
+        });
     }
 };
 
@@ -47,6 +57,7 @@ const actions = {
             })
             .then(task => {
                 context.commit('ADD_TASK', task);
+                context.commit('UPDATE_TASK_LIST_ORDER');
             });
     },
 
@@ -70,6 +81,10 @@ const actions = {
 
     openTaskList(context) {
         context.commit('OPEN_TASK_LIST');
+    },
+
+    updateTaskListOrder(context) {
+        context.commit('UPDATE_TASK_LIST_ORDER');
     }
 };
 

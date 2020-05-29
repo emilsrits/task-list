@@ -24,7 +24,10 @@ async function getDb() {
 const getAllTasks = async () => {
     const db = await getDb();
     let tasks = await db.getAll(DB_STORE_TASKS);
-    tasks = tasks.reverse();
+    
+    tasks.sort((a, b) => {
+        return a.order - b.order;
+    });
     
     return tasks;
 };
@@ -46,14 +49,15 @@ const addTask = async ({ title, done = false }) => {
     return task;
 };
 
-const updateTask = async ({id, title, description, date, done }) => {
+const updateTask = async ({id, title, description, date, done, order }) => {
     const db = await getDb();
     let task = await db.put(DB_STORE_TASKS, {
         id,
         title,
         description,
         date,
-        done
+        done,
+        order
     })
 
     return task;
