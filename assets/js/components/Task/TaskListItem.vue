@@ -128,6 +128,13 @@ export default {
 
 .task-title {
     width: 100%;
+    max-width: 220px;
+    overflow-wrap: break-word;
+}
+
+.task-description {
+    width: 100%;
+    overflow-wrap: break-word;
 }
 
 .task-date {
@@ -146,9 +153,10 @@ export default {
 
 .task-done {
 
-    .task-title, .task-description {
-        opacity: 0.5;
+    .task-title, 
+    .task-description {
         text-decoration: line-through;
+        opacity: 0.5;
     }
 
 }
@@ -161,7 +169,8 @@ export default {
     transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
 
-.slide-fade-enter, .slide-fade-leave-to{
+.slide-fade-enter, 
+.slide-fade-leave-to {
     transform: translateX(10px);
     opacity: 0;
 }
