@@ -20,7 +20,7 @@
             <draggable 
                 tag="ul" 
                 :list="localTasks" 
-                v-bind="getDragOptions"
+                v-bind="getDragOptions" 
                 @change="handleTaskListOrderChange"
             >
                 <li 

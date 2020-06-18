@@ -4,7 +4,10 @@
         @mouseenter="handleMouseEnter" 
         @mouseleave="handleMouseLeave"
     >
-        <div class="item-header">
+        <div 
+            class="item-header" 
+            :style="styleColorLabel"
+        >
             <h4 class="task-title">{{ task.title }}</h4>
 
             <div class="task-actions">
@@ -54,6 +57,8 @@
 </template>
 
 <script>
+import { Settings } from '@config/const';
+
 export default {
     name: 'TaskListItem',
 
@@ -62,7 +67,7 @@ export default {
     data () {
         return {
             showActions: false,
-            showHandle: false,
+            showHandle: false
         }
     },
 
@@ -83,6 +88,18 @@ export default {
 
         isTaskDue() {
             return this.dateDifference < 2;
+        },
+
+        styleColorLabel() {
+            if (Settings.COLORS.hasOwnProperty(this.task.color)) {
+                let color = Settings.COLORS[this.task.color].code;
+
+                return {
+                    borderLeft: '6px solid ' + color
+                }
+            }
+
+            return null;
         }
     },
 
@@ -129,6 +146,9 @@ export default {
     justify-content: space-between;
     align-items: flex-start;
     flex-direction: row;
+    margin-bottom: 6px;
+    padding: 2px 0 2px 4px;
+    min-height: 22px;
 
     .task-actions {
         margin-left: 5px;
@@ -145,6 +165,7 @@ export default {
 }
 
 .task-title {
+    margin: 0;
     width: 100%;
     max-width: 220px;
     overflow-wrap: break-word;

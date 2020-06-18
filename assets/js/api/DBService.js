@@ -49,7 +49,7 @@ const addTask = async ({ title, done = false }) => {
     return task;
 };
 
-const updateTask = async ({id, title, description, date, done, order }) => {
+const updateTask = async ({ id, title, description, date, done, color, order }) => {
     const db = await getDb();
     let task = await db.put(DB_STORE_TASKS, {
         id,
@@ -57,6 +57,7 @@ const updateTask = async ({id, title, description, date, done, order }) => {
         description,
         date,
         done,
+        color,
         order
     })
 

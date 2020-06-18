@@ -24,6 +24,9 @@
             :value="task.description"
         ></textarea>
 
+        <span class="label">Color label</span>
+        <color-picker :active-color="this.activeColor" @colorPicked="handleColorPicked"/>
+
         <div class="form-action">
             <button 
                 class="icon-undo2 button button-edit" 
@@ -39,12 +42,19 @@
 </template>
 
 <script>
+import ColorPicker from '../Widgets/ColorPicker';
+
 export default {
     name: 'TaskEdit',
 
+    components: {
+        ColorPicker
+    },
+
     data () {
         return {
-            task: this.$store.state.currentTask
+            task: this.$store.state.currentTask,
+            activeColor: this.$store.state.currentTask.color
         }
     },
 
@@ -57,6 +67,10 @@ export default {
     methods: {
         handleShowTasks(event) {
             this.$store.dispatch('openTaskList');
+        },
+
+        handleColorPicked(color) {
+            this.activeColor = color;
         },
 
         handleTaskUpdate(event) {
@@ -72,6 +86,8 @@ export default {
             this.task.date = el.elements.date.value;
 
             this.task.description = el.elements.description.value;
+
+            this.task.color = this.activeColor;
 
             this.$store.dispatch('updateTask', this.task);
         }
