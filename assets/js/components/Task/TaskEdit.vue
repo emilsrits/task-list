@@ -12,8 +12,7 @@
         <input 
             type="date" 
             name="date" 
-            :value="task.date" 
-            :min="minDate"
+            :value="task.date"
         >
 
         <span class="label">Description</span>
@@ -55,12 +54,6 @@ export default {
         return {
             task: this.$store.state.currentTask,
             activeColor: this.$store.state.currentTask.color
-        }
-    },
-
-    computed: {
-        minDate() {
-            return new Date().toISOString().split("T")[0];
         }
     },
 
