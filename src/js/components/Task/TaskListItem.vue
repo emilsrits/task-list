@@ -132,7 +132,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../sass/variables.scss";
+@import "@styles/variables.scss";
 
 .item {
     position: relative;

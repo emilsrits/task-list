@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import TaskList from './Task/TaskList.vue';
-import TaskEdit from './Task/TaskEdit.vue';
+import TaskList from '@components/Task/TaskList.vue';
+import TaskEdit from '@components/Task/TaskEdit.vue';
 
 export default {
     name: 'App',

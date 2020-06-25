@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import {default as db} from './../api/DBService.js';
+import { default as db } from '@api/DBService';
 
 Vue.use(Vuex);
 

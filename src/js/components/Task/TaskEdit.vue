@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import ColorPicker from '../Widgets/ColorPicker';
+import ColorPicker from '@components/Widgets/ColorPicker';
 
 export default {
     name: 'TaskEdit',
@@ -89,7 +89,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../sass/variables.scss";
+@import "@styles/variables.scss";
 
 form > * {
     margin: 0 0 10px;

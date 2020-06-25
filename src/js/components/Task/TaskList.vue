@@ -36,7 +36,7 @@
 
 <script>
 import draggable from 'vuedraggable';
-import TaskListItem from './TaskListItem.vue';
+import TaskListItem from '@components/Task/TaskListItem.vue';
 
 export default {
     name: 'TaskList',
@@ -97,7 +97,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../sass/variables.scss";
+@import "@styles/variables.scss";
 
 .task-panel form {
     display: flex;

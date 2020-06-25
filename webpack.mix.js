@@ -1,15 +1,18 @@
 let mix = require('laravel-mix');
-let src_path = 'assets/js';
+let src_path = 'src';
 
 mix.disableNotifications();
 
 mix.webpackConfig({
     resolve: {
         alias: {
-            '@config': path.resolve(__dirname, src_path + '/config')
+            '@api': path.resolve(__dirname, src_path + '/js/api'),
+            '@components': path.resolve(__dirname, src_path + '/js/components'),
+            '@config': path.resolve(__dirname, src_path + '/js/config'),
+            '@styles': path.resolve(__dirname, src_path + '/sass')
         }
     }
 });
 
-mix.js('assets/js/app.js', 'dist/js/').
-    sass('assets/sass/app.scss', 'dist/css/app.css');
+mix.js('src/js/app.js', 'dist/js/').
+    sass('src/sass/app.scss', 'dist/css/app.css');
