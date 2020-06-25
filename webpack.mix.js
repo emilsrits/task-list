@@ -9,6 +9,7 @@ mix.webpackConfig({
             '@api': path.resolve(__dirname, src_path + '/js/api'),
             '@components': path.resolve(__dirname, src_path + '/js/components'),
             '@config': path.resolve(__dirname, src_path + '/js/config'),
+            '@store': path.resolve(__dirname, src_path + '/js/store'),
             '@styles': path.resolve(__dirname, src_path + '/sass')
         }
     }
