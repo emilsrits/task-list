@@ -44,9 +44,8 @@
         <p 
             class="task-description" 
             v-if="task.description"
-        >
-            {{ task.description }}
-        </p>
+            v-html="descriptionFormatted"
+        ></p>
 
         <div :class="[{ 'is-visible': showHandle }, 'handle']">
             <span>&#8901;</span>
@@ -88,6 +87,10 @@ export default {
 
         isTaskDue() {
             return this.dateDifference < 2;
+        },
+
+        descriptionFormatted() {
+            return this.task.description.replace(/((https|http)?:\/\/[^\s]+)/, '<a href="$1" target="_blank">$1</a>');
         },
 
         styleColorLabel() {
