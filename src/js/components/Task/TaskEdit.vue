@@ -1,30 +1,39 @@
 <template>
-    <form @submit="handleTaskUpdate">
+    <form 
+        @submit="handleTaskUpdate" 
+        @change="handleInputChange"
+    >
         <span class="label">Title</span>
         <input 
+            ref="title"
             type="text" 
             name="title" 
-            :value="task.title" 
+            :value="taskTitle" 
             autocomplete="off"
         >
 
         <span class="label">Date</span>
         <input 
+            ref="date"
             type="date" 
             name="date" 
-            :value="task.date"
+            :value="taskDate"
         >
 
         <span class="label">Description</span>
         <textarea 
+            ref="description"
             name="description" 
             cols="10" 
             rows="5" 
-            :value="task.description"
+            :value="taskDescription"
         ></textarea>
 
         <span class="label">Color label</span>
-        <color-picker :active-color="this.activeColor" @colorPicked="handleColorPicked"/>
+        <color-picker 
+            :active-color="taskActiveColor" 
+            @colorPicked="handleColorPicked"
+        />
 
         <div class="form-action">
             <button 
@@ -53,7 +62,10 @@ export default {
     data () {
         return {
             task: this.$store.state.currentTask,
-            activeColor: this.$store.state.currentTask.color
+            taskTitle: this.$store.state.currentTask.title,
+            taskDate: this.$store.state.currentTask.date,
+            taskDescription: this.$store.state.currentTask.description,
+            taskActiveColor: this.$store.state.currentTask.color
         }
     },
 
@@ -62,25 +74,23 @@ export default {
             this.$store.dispatch('openTaskList');
         },
 
+        handleInputChange(event) {
+            this.taskTitle = this.$refs.title.value;
+            this.taskDate = this.$refs.date.value;
+            this.taskDescription = this.$refs.description.value;
+        },
+
         handleColorPicked(color) {
-            this.activeColor = color;
+            this.taskActiveColor = color;
         },
 
         handleTaskUpdate(event) {
             event.preventDefault();
 
-            let el = event.target;
-
-            let title = el.elements.title.value;
-            if (title || title.length !== 0) {
-                this.task.title = title;
-            }
-
-            this.task.date = el.elements.date.value;
-
-            this.task.description = el.elements.description.value;
-
-            this.task.color = this.activeColor;
+            if (this.taskTitle || this.taskTitle.length !== 0) this.task.title = this.taskTitle;
+            this.task.date = this.taskDate;
+            this.task.description = this.taskDescription;
+            this.task.color = this.taskActiveColor;
 
             this.$store.dispatch('updateTask', this.task);
         }
