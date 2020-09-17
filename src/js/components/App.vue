@@ -34,9 +34,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@styles/variables.scss";
+
 .container {
     padding: 20px;
-    min-width: 320px;
-    max-width: 320px;
+    min-width: 420px;
+    max-width: 420px;
+    background: $color-background;
 }
 </style>

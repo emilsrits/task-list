@@ -4,7 +4,7 @@ $font-size-base: 16px;
 
 // Icons
 $icomoon-font-family: "icomoon" !default;
-$icomoon-font-path: "/../../dist/fonts" !default;
+$icomoon-font-path: "~/dist/fonts" !default;
 $icon-pencil2: "\e906";
 $icon-clock: "\e94e";
 $icon-floppy-disk: "\e962";
@@ -17,12 +17,17 @@ $icon-checkmark: "\ea10";
 // Colors
 $color-green: #0aaa67;
 $color-blue: #4083f0;
+$color-blue-darker: #426bad;
 $color-yellow: #f1e648;
 $color-red: #CC4040;
 $color-white: #f3f2f2;
+$color-gray-lighter: #ececec;
+$color-gray-light: #c2c2c2;
 $color-gray: #6b6e70;
 $color-gray-darker: #585858;
 $color-black: #0e0e0e;
+
+$color-background: #f9f9f9;
 
 // Misc
 $box-shadow-inset: inset 0 1px 20px 2px;

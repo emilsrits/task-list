@@ -14,5 +14,9 @@ h4 {
 
 p {
     margin: 0 0 5px;
-    font-size: 14px;
+    font-size: 0.875em;
+
+    a {
+        color: $color-blue-darker;
+    }
 }

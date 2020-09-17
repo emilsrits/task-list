@@ -104,25 +104,18 @@ export default {
     justify-content: flex-start;
     align-items: center;
     flex-direction: row;
-    padding: 5px;
-    background-color: rgba(20, 150, 90, 0.3);
+    padding: 5px 0;
 
     .task-title-input {
         margin-right: 5px;
-        padding: 4px 8px;
+        padding: 3px 8px;
         width: 100%;
         height: 22px;
-
-        &:focus {
-            outline: $color-black solid 2px;
-        }
-
     }
 
     .button-add {
         padding: 8px;
     }
-
 }
 
 ul {

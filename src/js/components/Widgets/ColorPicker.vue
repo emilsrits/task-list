@@ -68,8 +68,6 @@ export default {
         &.is-active {
             border: 2px solid $color-black;
         }
-
     }
-
 }
 </style>

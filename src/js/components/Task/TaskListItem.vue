@@ -3,43 +3,53 @@
         :class="['item', { 'task-done': task.done }]" 
         @mouseenter="handleMouseEnter" 
         @mouseleave="handleMouseLeave"
+        :style="styleColorLabel"
     >
-        <div 
-            class="item-header" 
-            :style="styleColorLabel"
-        >
-            <h4 class="task-title">{{ task.title }}</h4>
+        <div class="item-panel">
+            <div class="item-panel-left">
+                <div class="checkbox">
+                    <input 
+                        type="checkbox" 
+                        :id="task.id" 
+                        :name="task.id" 
+                        :checked="task.done"
+                        @change="handleTaskCheck"
+                    >
+                    <label :for="task.id"></label>
+                </div>
+            </div>
 
-            <div class="task-actions">
-                <transition name="slide-fade">
-                    <div v-if="showActions">
-                        <button 
-                            class="icon-checkmark button button-check" 
-                            type="button" 
-                            @click="handleTaskCheck"
-                        ></button>
-                        <button 
-                            class="icon-pencil2 button button-edit" 
-                            type="button" 
-                            @click="handleTaskEdit"
-                        ></button>
-                        <button 
-                            class="icon-minus button button-delete" 
-                            type="button" 
-                            @click="handleTaskDelete"
-                        ></button>
+            <div class="item-panel-right">
+                <div class="item-header">
+                    <h4 class="task-title">{{ task.title }}</h4>
+
+                    <div class="task-actions">
+                        <transition name="slide-fade">
+                            <div v-if="showActions">
+                                <button 
+                                    class="icon-pencil2 button button-edit" 
+                                    type="button" 
+                                    @click="handleTaskEdit"
+                                ></button>
+                                <button 
+                                    class="icon-minus button button-delete" 
+                                    type="button" 
+                                    @click="handleTaskDelete"
+                                ></button>
+                            </div>
+                        </transition>
                     </div>
-                </transition>
+                </div>
+
+                <p 
+                    :class="[{ 'task-due': isTaskDue }, 'task-date']" 
+                    v-if="task.date && !task.done"
+                >
+                    <span class="icon-clock"></span>
+                    {{ dateFormatted }}
+                </p>
             </div>
         </div>
-
-        <p 
-            :class="[{ 'task-due': isTaskDue }, 'task-date']" 
-            v-if="task.date && !task.done"
-        >
-            <span class="icon-clock"></span>
-            {{ dateFormatted }}
-        </p>
 
         <p 
             class="task-description" 
@@ -98,7 +108,7 @@ export default {
                 let color = Settings.COLORS[this.task.color].code;
 
                 return {
-                    borderLeft: '6px solid ' + color
+                    borderLeft: '3px solid ' + color
                 }
             }
 
@@ -139,9 +149,26 @@ export default {
 
 .item {
     position: relative;
-    padding: 2px 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+    padding: 2px 15px;
+    background: $color-gray-lighter;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
     transition: opacity 0.3s ease;
+}
+
+.item-panel {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.item-panel-left {
+    margin-right: 24px;
+}
+
+.item-panel-right {
+    flex: 1 0 0;
 }
 
 .item-header {
@@ -149,12 +176,13 @@ export default {
     justify-content: space-between;
     align-items: flex-start;
     flex-direction: row;
-    margin-bottom: 6px;
     padding: 2px 0 2px 4px;
     min-height: 22px;
 
     .task-actions {
-        margin-left: 5px;
+        position: absolute;
+        top: 8px;
+        right: 10px;
         width: 120px;
         text-align: right;
 
@@ -162,9 +190,7 @@ export default {
             padding: 4px;
             font-size: 10px;
         }
-
     }
-    
 }
 
 .task-title {
@@ -175,18 +201,19 @@ export default {
 }
 
 .task-description {
-    width: 100%;
+    margin: 2px 0 6px 44px; 
+    font-size: 0.75em;
     overflow-wrap: break-word;
 }
 
 .task-date {
+    margin: 0;
     padding: 5px 0;
     font-size: 0.7em;
 
     > span {
         padding-right: 5px;
     }
-
 }
 
 .task-due {
@@ -194,13 +221,11 @@ export default {
 }
 
 .task-done {
-
     .task-title, 
     .task-description {
         text-decoration: line-through;
         opacity: 0.5;
     }
-
 }
 
 .handle {
@@ -220,7 +245,6 @@ export default {
     span {
         line-height: 10px;
     }
-
 }
 
 .slide-fade-enter-active {

@@ -25,7 +25,7 @@
             ref="description"
             name="description" 
             cols="10" 
-            rows="5" 
+            rows="6" 
             :value="taskDescription"
         ></textarea>
 
@@ -113,6 +113,7 @@ textarea {
 .label {
     color: $color-gray-darker;
     font-size: 0.8em;
+    font-weight: bold;
     vertical-align: super;
 }
 
@@ -126,6 +127,5 @@ textarea {
         padding: 8px;
         margin-left: 10px;
     }
-    
 }
 </style>
