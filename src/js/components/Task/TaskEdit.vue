@@ -80,9 +80,9 @@ export default {
         },
 
         handleInputChange(event) {
-            this.taskTitle = this.$refs.title.value;
+            this.taskTitle = this.$refs.title.value.trim();
             this.taskDate = this.$refs.date.value;
-            this.taskDescription = this.$refs.description.value;
+            this.taskDescription = this.$refs.description.value.trim();
         },
 
         handleColorPicked(color) {
@@ -92,7 +92,9 @@ export default {
         handleTaskUpdate(event) {
             event.preventDefault();
 
-            if (this.taskTitle.length > 0 && this.taskTitle.length <= this.titleMax) this.task.title = this.taskTitle;
+            let titleLength = this.taskTitle.length;
+
+            if (titleLength > 0 && titleLength <= this.titleMax) this.task.title = this.taskTitle;
             this.task.date = this.taskDate;
             this.task.description = this.taskDescription;
             this.task.color = this.taskActiveColor;

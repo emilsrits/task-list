@@ -72,8 +72,10 @@ export default {
 
             let el = event.target;
 
-            let title = el.elements.title.value;
-            if (title.length > 0 && title.length <= this.titleMax) {
+            let title = el.elements.title.value.trim();
+            let titleLength = title.length;
+
+            if (titleLength > 0 && titleLength <= this.titleMax) {
                 let task = {
                     title: el.elements.title.value
                 }
