@@ -10,6 +10,7 @@
             name="title" 
             :value="taskTitle" 
             autocomplete="off"
+            :maxlength="titleMax"
         >
 
         <span class="label">Date</span>
@@ -27,6 +28,7 @@
             cols="10" 
             rows="6" 
             :value="taskDescription"
+            :maxlength="descriptionMax"
         ></textarea>
 
         <span class="label">Color label</span>
@@ -50,6 +52,7 @@
 </template>
 
 <script>
+import { Settings } from '@config/const';
 import ColorPicker from '@components/Widgets/ColorPicker';
 
 export default {
@@ -65,7 +68,9 @@ export default {
             taskTitle: this.$store.state.currentTask.title,
             taskDate: this.$store.state.currentTask.date,
             taskDescription: this.$store.state.currentTask.description,
-            taskActiveColor: this.$store.state.currentTask.color
+            taskActiveColor: this.$store.state.currentTask.color,
+            titleMax: Settings.INPUT_VALIDATE.title.max,
+            descriptionMax: Settings.INPUT_VALIDATE.description.max
         }
     },
 
@@ -87,7 +92,7 @@ export default {
         handleTaskUpdate(event) {
             event.preventDefault();
 
-            if (this.taskTitle || this.taskTitle.length !== 0) this.task.title = this.taskTitle;
+            if (this.taskTitle.length > 0 && this.taskTitle.length <= this.titleMax) this.task.title = this.taskTitle;
             this.task.date = this.taskDate;
             this.task.description = this.taskDescription;
             this.task.color = this.taskActiveColor;

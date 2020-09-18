@@ -32,5 +32,14 @@ export const Settings = {
             color: 'gray',
             code: '#a3a3a3'
         }
+    },
+
+    INPUT_VALIDATE: {
+        'title': {
+            max: 60
+        },
+        'description': {
+            max: 240
+        }
     }
 };

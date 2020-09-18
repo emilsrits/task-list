@@ -7,6 +7,7 @@
                     type="text" 
                     name="title" 
                     autocomplete="off"
+                    :maxlength="titleMax"
                 >
                 <button 
                     class="icon-plus button button-add" 
@@ -35,6 +36,7 @@
 </template>
 
 <script>
+import { Settings } from '@config/const';
 import draggable from 'vuedraggable';
 import TaskListItem from '@components/Task/TaskListItem.vue';
 
@@ -48,7 +50,8 @@ export default {
 
     data () {
         return {
-            localTasks: this.$store.state.tasks
+            localTasks: this.$store.state.tasks,
+            titleMax: Settings.INPUT_VALIDATE.title.max
         }
     },
 
@@ -70,15 +73,15 @@ export default {
             let el = event.target;
 
             let title = el.elements.title.value;
-            if (title || title.length !== 0) {
+            if (title.length > 0 && title.length <= this.titleMax) {
                 let task = {
                     title: el.elements.title.value
                 }
 
                 this.$store.dispatch('addTask', task);
-            }
 
-            el.elements.title.value = null;
+                el.elements.title.value = null;
+            }
         },
 
         handleTaskListOrderChange() {

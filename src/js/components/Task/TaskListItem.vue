@@ -196,7 +196,7 @@ export default {
 .task-title {
     margin: 0;
     width: 100%;
-    max-width: 220px;
+    max-width: 250px;
     overflow-wrap: break-word;
 }
 
