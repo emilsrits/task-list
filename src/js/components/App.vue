@@ -37,7 +37,7 @@ export default {
 @import "@styles/variables.scss";
 
 .container {
-    padding: 20px;
+    padding: 16px 20px;
     min-width: 420px;
     max-width: 420px;
     background: $color-background;
