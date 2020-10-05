@@ -203,6 +203,7 @@ export default {
 .task-description {
     margin: 2px 0 6px 44px; 
     font-size: 0.75em;
+    line-height: 1.4;
     overflow-wrap: break-word;
 }
 
