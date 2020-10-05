@@ -100,7 +100,7 @@ export default {
         },
 
         descriptionFormatted() {
-            return this.task.description.replace(/((https|http)?:\/\/[^\s]+)/, '<a href="$1" target="_blank">$1</a>');
+            return this.task.description.replace(/((https|http)?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>');
         },
 
         styleColorLabel() {
