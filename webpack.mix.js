@@ -3,6 +3,12 @@ let src_path = 'src';
 
 mix.disableNotifications();
 
+mix.options({
+    terser: {
+        extractComments: false,
+    }
+});
+
 mix.webpackConfig({
     resolve: {
         alias: {
