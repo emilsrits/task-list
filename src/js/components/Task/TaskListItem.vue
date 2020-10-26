@@ -23,22 +23,20 @@
                 <div class="item-header">
                     <h4 class="task-title">{{ task.title }}</h4>
 
-                    <div class="task-actions">
-                        <transition name="slide-fade">
-                            <div v-if="showActions">
-                                <button 
-                                    class="icon-pencil2 button button-edit" 
-                                    type="button" 
-                                    @click="handleTaskEdit"
-                                ></button>
-                                <button 
-                                    class="icon-minus button button-delete" 
-                                    type="button" 
-                                    @click="handleTaskDelete"
-                                ></button>
-                            </div>
-                        </transition>
-                    </div>
+                    <transition name="slide-fade">
+                        <div v-if="showActions" class="task-actions">
+                            <button 
+                                class="icon-pencil2 button button-edit" 
+                                type="button" 
+                                @click="handleTaskEdit"
+                            ></button>
+                            <button 
+                                class="icon-minus button button-delete" 
+                                type="button" 
+                                @click="handleTaskDelete"
+                            ></button>
+                        </div>
+                    </transition>
                 </div>
 
                 <p 
@@ -149,7 +147,7 @@ export default {
 
 .item {
     position: relative;
-    padding: 2px 15px;
+    padding: 5px 15px 2px;
     background: $color-gray-lighter;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -160,7 +158,7 @@ export default {
 .item-panel {
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .item-panel-left {
@@ -176,15 +174,16 @@ export default {
     justify-content: space-between;
     align-items: flex-start;
     flex-direction: row;
-    padding: 2px 0 2px 4px;
-    min-height: 22px;
+
 
     .task-actions {
         position: absolute;
         top: 8px;
         right: 10px;
-        width: 120px;
+        padding: 4px;
         text-align: right;
+        background-color: rgba(0, 0, 0, 0.7);
+        border-radius: 3px;
 
         .button {
             padding: 4px;
@@ -194,9 +193,8 @@ export default {
 }
 
 .task-title {
-    margin: 0;
+    margin: 0 0 5px;
     width: 100%;
-    max-width: 250px;
     overflow-wrap: break-word;
 }
 
@@ -208,8 +206,7 @@ export default {
 }
 
 .task-date {
-    margin: 0;
-    padding: 5px 0;
+    margin: 5px 0;
     font-size: 0.7em;
 
     > span {
@@ -249,7 +246,7 @@ export default {
 }
 
 .slide-fade-enter-active {
-    transition: all .3s ease;
+    transition: all .2s ease;
 }
 
 .slide-fade-leave-active {
