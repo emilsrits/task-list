@@ -1,8 +1,8 @@
 {
 
-  "name": "Task list",
+  "name": "Task List",
   "version": "1.0",
-  "description": "Task list with reminders",
+  "description": "A simple task list extension",
   "manifest_version": 2,
 
   "icons": {
@@ -11,7 +11,7 @@
 
   "browser_action": {
     "default_icon": "src/icons/icon-48.png",
-    "default_title": "Task list",
+    "default_title": "Task List",
     "default_popup": "app.html"
   },
 
