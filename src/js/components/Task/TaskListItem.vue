@@ -178,8 +178,8 @@ export default {
 
     .task-actions {
         position: absolute;
-        top: 8px;
-        right: 10px;
+        top: 4px;
+        right: 4px;
         padding: 4px;
         text-align: right;
         background-color: rgba(0, 0, 0, 0.7);
