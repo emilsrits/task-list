@@ -40,8 +40,8 @@
                 </div>
 
                 <p 
-                    :class="[{ 'task-due': isTaskDue }, 'task-date']" 
                     v-if="task.date && !task.done"
+                    :class="[{ 'task-due': isTaskDue }, 'task-date']" 
                 >
                     <span class="icon-clock"></span>
                     {{ dateFormatted }}
@@ -50,8 +50,8 @@
         </div>
 
         <p 
-            class="task-description" 
             v-if="task.description"
+            class="task-description" 
             v-html="descriptionFormatted"
         ></p>
 
@@ -202,7 +202,8 @@ export default {
     margin: 2px 0 6px 44px; 
     font-size: 0.75em;
     line-height: 1.4;
-    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    word-break: keep-all;
 }
 
 .task-date {
