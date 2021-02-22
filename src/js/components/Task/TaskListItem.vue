@@ -203,7 +203,7 @@ export default {
     font-size: 0.75em;
     line-height: 1.4;
     white-space: pre-wrap;
-    word-break: keep-all;
+    word-break: break-word;
 }
 
 .task-date {
