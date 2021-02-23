@@ -1,12 +1,12 @@
 <template>
     <div 
-        :class="['item', { 'task-done': task.done }]" 
+        :class="['task', { 'task-done': task.done }]" 
         @mouseenter="handleMouseEnter" 
         @mouseleave="handleMouseLeave"
         :style="styleColorLabel"
     >
-        <div class="item-panel">
-            <div class="item-panel-left">
+        <div class="task-panel">
+            <div class="task-panel-left">
                 <div class="checkbox">
                     <input 
                         type="checkbox" 
@@ -19,8 +19,8 @@
                 </div>
             </div>
 
-            <div class="item-panel-right">
-                <div class="item-header">
+            <div class="task-panel-right">
+                <div class="task-header">
                     <h4 class="task-title">{{ task.title }}</h4>
 
                     <transition name="slide-fade">
@@ -38,22 +38,17 @@
                         </div>
                     </transition>
                 </div>
-
-                <p 
-                    v-if="task.date && !task.done"
-                    :class="[{ 'task-due': isTaskDue }, 'task-date']" 
-                >
-                    <span class="icon-clock"></span>
-                    {{ dateFormatted }}
-                </p>
             </div>
         </div>
 
-        <p 
-            v-if="task.description"
-            class="task-description" 
-            v-html="descriptionFormatted"
-        ></p>
+        <div v-if="task.date && !task.done" :class="[{ 'is-due': isTaskDue }, 'task-date']">
+            <span class="icon icon-clock"></span>
+            <span>{{ dateFormatted }}</span>
+        </div>
+
+        <div v-if="task.description" class="task-description">
+            <p v-html="descriptionFormatted"></p>
+        </div>
 
         <div :class="[{ 'is-visible': showHandle }, 'handle']">
             <span>&#8901;</span>
@@ -145,85 +140,89 @@ export default {
 <style lang="scss" scoped>
 @import "@styles/variables.scss";
 
-.item {
+.task {
     position: relative;
     padding: 5px 15px 2px;
-    background: $color-gray-lighter;
+    background: $color-background-lighter;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
     transition: opacity 0.3s ease;
-}
 
-.item-panel {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-}
+    &-panel {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
 
-.item-panel-left {
-    margin-right: 24px;
-}
+        &-left {
+            margin-right: 16px;
+        }
 
-.item-panel-right {
-    flex: 1 0 0;
-}
-
-.item-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-direction: row;
-
-
-    .task-actions {
-        position: absolute;
-        top: 4px;
-        right: 4px;
-        padding: 4px;
-        text-align: right;
-        background-color: rgba(0, 0, 0, 0.7);
-        border-radius: 3px;
-
-        .button {
-            padding: 4px;
-            font-size: 10px;
+        &-right {
+            flex: 1 0 0;
         }
     }
-}
 
-.task-title {
-    margin: 0 0 5px;
-    width: 100%;
-    overflow-wrap: break-word;
-}
+    &-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-direction: row;
 
-.task-description {
-    margin: 2px 0 6px 44px; 
-    font-size: 0.75em;
-    line-height: 1.4;
-    white-space: pre-wrap;
-    word-break: break-word;
-}
+        .task-actions {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            padding: 4px;
+            text-align: right;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 3px;
 
-.task-date {
-    margin: 5px 0;
-    font-size: 0.7em;
-
-    > span {
-        padding-right: 5px;
+            .button {
+                padding: 4px;
+                font-size: 10px;
+            }
+        }
     }
-}
 
-.task-due {
-    color: $color-red;
-}
+    &-title {
+        margin: 0;
+        width: 100%;
+        overflow-wrap: break-word;
+    }
 
-.task-done {
-    .task-title, 
-    .task-description {
-        text-decoration: line-through;
-        opacity: 0.5;
+    &-description {
+        margin: 2px 0 6px 36px; 
+
+        p {
+            margin: 0;
+            font-size: 0.75em;
+            line-height: 1.4;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+    }
+
+    &-date {
+        margin: 5px 0 8px 36px;
+        color: $color-font-secondary;
+        font-size: 0.7em;
+
+        &.is-due {
+            color: $color-red;
+        }
+
+        .icon {
+            padding-right: 5px;
+        }
+    }
+
+    &-done {
+        .task-title, 
+        .task-description {
+            text-decoration: line-through;
+            opacity: 0.5;
+        }
     }
 }
 

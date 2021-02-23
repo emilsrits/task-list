@@ -1,19 +1,21 @@
 <template>
     <form 
         @submit="handleTaskUpdate" 
-        @change="handleInputChange"
+        @change="handleInputChange" 
+        class="form"
     >
-        <span class="label">Title</span>
+        <span class="form-label">Title</span>
         <input 
             ref="title"
             type="text" 
             name="title" 
             :value="taskTitle" 
-            autocomplete="off"
             :maxlength="titleMax"
+            autocomplete="off"
+            spellcheck="false"
         >
 
-        <span class="label">Date</span>
+        <span class="form-label">Date</span>
         <input 
             ref="date"
             type="date" 
@@ -21,7 +23,7 @@
             :value="taskDate"
         >
 
-        <span class="label">Description</span>
+        <span class="form-label">Description</span>
         <textarea 
             ref="description"
             name="description" 
@@ -29,9 +31,10 @@
             rows="6" 
             :value="taskDescription"
             :maxlength="descriptionMax"
+            spellcheck="false"
         ></textarea>
 
-        <span class="label">Color label</span>
+        <span class="form-label">Color label</span>
         <color-picker 
             :active-color="taskActiveColor" 
             @colorPicked="handleColorPicked"
@@ -108,31 +111,29 @@ export default {
 <style lang="scss" scoped>
 @import "@styles/variables.scss";
 
-form > * {
-    margin: 0 0 10px;
-    width: 100%;
-}
-
-textarea {
-    resize: vertical;
-}
-
-.label {
-    color: $color-gray-darker;
-    font-size: 0.8em;
-    font-weight: bold;
-    vertical-align: super;
-}
-
-.form-action {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    flex-direction: row;
-
+.form {
     > * {
-        padding: 8px;
-        margin-left: 10px;
+        margin: 0 0 10px;
+        width: 100%;
+    }
+
+    &-label {
+        color: $color-font;
+        font-size: 0.8em;
+        font-weight: bold;
+        vertical-align: super;
+    }
+
+    &-action {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        flex-direction: row;
+
+        > * {
+            padding: 8px;
+            margin-left: 10px;
+        }
     }
 }
 </style>

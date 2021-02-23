@@ -3,11 +3,11 @@
     font-size: 12px;
     border: 2px solid transparent;
     outline: none;
-    box-shadow: $box-shadow-inset $color-gray;
+    box-shadow: $box-shadow-inset #6b6e70;
     cursor: pointer;
 
     &:hover {
-        box-shadow: $box-shadow-inset $color-gray-darker;
+        box-shadow: $box-shadow-inset #585858;
     }
 }
 

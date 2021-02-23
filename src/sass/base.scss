@@ -1,4 +1,5 @@
 body {
+    color: $color-font;
     font-family: $font-family-base;
     font-size: $font-size-base;
     overflow-y: scroll;
@@ -17,6 +18,6 @@ p {
     font-size: 0.875em;
 
     a {
-        color: $color-blue-darker;
+        color: $color-font-link;
     }
 }
