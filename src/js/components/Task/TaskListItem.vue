@@ -196,7 +196,7 @@ export default {
 
         p {
             margin: 0;
-            font-size: 0.75em;
+            font-size: 0.875em;
             line-height: 1.4;
             white-space: pre-wrap;
             word-break: break-word;
