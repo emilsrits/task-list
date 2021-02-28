@@ -22,7 +22,7 @@
                 <draggable 
                     tag="ul" 
                     :list="localTasks" 
-                    v-bind="getDragOptions" 
+                    v-bind="dragOptions" 
                     @change="handleTaskListOrderChange"
                 >
                     <li 
@@ -63,7 +63,7 @@ export default {
     },
 
     computed: {
-        getDragOptions() {
+        dragOptions() {
             return {
                 animation: 0,
                 disabled: false,

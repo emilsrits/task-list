@@ -10,7 +10,7 @@ async function getDb() {
             if (!db.objectStoreNames.contains(DB_STORE_TASKS)) {
                 const store = db.createObjectStore(DB_STORE_TASKS, {
                     keyPath: 'id',
-                    autoIncrement: true,
+                    autoIncrement: true
                 });
     
                 store.createIndex('title', 'title');
@@ -34,14 +34,14 @@ const getAllTasks = async () => {
 
 const getTask = async (id) => {
     const db = await getDb();
-    let task = await db.get(DB_STORE_TASKS, id);
+    const task = await db.get(DB_STORE_TASKS, id);
 
     return task;
 };
 
 const addTask = async ({ title, done = false }) => {
     const db = await getDb();
-    let task = await db.add(DB_STORE_TASKS, {
+    const task = await db.add(DB_STORE_TASKS, {
         title,
         done
     });
@@ -49,13 +49,14 @@ const addTask = async ({ title, done = false }) => {
     return task;
 };
 
-const updateTask = async ({ id, title, description, date, done, color, order }) => {
+const updateTask = async ({ id, title, description, date, time, done, color, order }) => {
     const db = await getDb();
-    let task = await db.put(DB_STORE_TASKS, {
+    const task = await db.put(DB_STORE_TASKS, {
         id,
         title,
         description,
         date,
+        time,
         done,
         color,
         order
@@ -66,7 +67,7 @@ const updateTask = async ({ id, title, description, date, done, color, order }) 
 
 const deleteTask = async (id) => {
     const db = await getDb();
-    let task = await db.delete(DB_STORE_TASKS, Number(id));
+    const task = await db.delete(DB_STORE_TASKS, Number(id));
 
     return task;
 };

@@ -61,3 +61,12 @@ textarea {
         }
     }
 }
+
+.input-group {
+    display: flex;
+    flex-wrap: wrap;
+
+    > *:not(:first-of-type) {
+        margin-left: 10px;
+    }
+}

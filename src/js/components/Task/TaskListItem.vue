@@ -75,21 +75,26 @@ export default {
 
     computed: {
         dateFormatted() {
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            let date = new Date(this.task.date);
-
-            return date.toLocaleDateString('en-US', options);
-        },
-
-        dateDifference() {
-            let today = new Date();
-            let due = new Date(this.task.date);
+            let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            let datetime = this.task.date;
             
-            return parseInt((due - today) / (1000 * 60 * 60 * 24), 10);
+            if (this.task.time) {
+                options = { ...options, hour: '2-digit', minute: '2-digit' };
+                datetime = `${this.task.date}T${this.task.time}`;
+            }
+
+            let date = new Date(datetime);
+
+            return date.toLocaleDateString('en-GB', options);
         },
 
         isTaskDue() {
-            return this.dateDifference < 2;
+            const today = new Date();
+            const due = new Date(this.task.date);
+            
+            const dateDifference = parseInt((due - today) / (1000 * 60 * 60 * 24), 10);
+
+            return dateDifference < 1;
         },
 
         descriptionFormatted() {

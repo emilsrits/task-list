@@ -16,12 +16,21 @@
         >
 
         <span class="form-label">Date</span>
-        <input 
-            ref="date"
-            type="date" 
-            name="date" 
-            :value="taskDate"
-        >
+        <div class="input-group">
+            <input 
+                ref="date"
+                type="date" 
+                name="date" 
+                :min="minDateSelect"
+                :value="taskDate"
+            >
+            <input 
+                ref="time"
+                type="time" 
+                name="time"
+                :value="taskTime"
+            >
+        </div>
 
         <span class="form-label">Description</span>
         <textarea 
@@ -70,10 +79,23 @@ export default {
             task: this.$store.state.currentTask,
             taskTitle: this.$store.state.currentTask.title,
             taskDate: this.$store.state.currentTask.date,
+            taskTime: this.$store.state.currentTask.time,
             taskDescription: this.$store.state.currentTask.description,
             taskActiveColor: this.$store.state.currentTask.color,
             titleMax: Settings.INPUT_VALIDATE.title.max,
             descriptionMax: Settings.INPUT_VALIDATE.description.max
+        }
+    },
+
+    computed: {
+        minDateSelect() {
+            const date = new Date(new Date().getFullYear(), 0, 1);
+
+            const yyyy = date.getFullYear();
+            const mm = String(date.getMonth() + 1).padStart(2, "0");
+            const dd = String(date.getDate()).padStart(2, "0");
+
+            return `${yyyy}-${mm}-${dd}`;
         }
     },
 
@@ -85,6 +107,7 @@ export default {
         handleInputChange(event) {
             this.taskTitle = this.$refs.title.value.trim();
             this.taskDate = this.$refs.date.value;
+            this.taskTime = this.$refs.time.value;
             this.taskDescription = this.$refs.description.value.trim();
         },
 
@@ -95,10 +118,13 @@ export default {
         handleTaskUpdate(event) {
             event.preventDefault();
 
-            let titleLength = this.taskTitle.length;
+            const titleLength = this.taskTitle.length;
+            if (titleLength > 0 && titleLength <= this.titleMax) {
+                this.task.title = this.taskTitle;
+            }
 
-            if (titleLength > 0 && titleLength <= this.titleMax) this.task.title = this.taskTitle;
             this.task.date = this.taskDate;
+            this.task.time = this.taskTime;
             this.task.description = this.taskDescription;
             this.task.color = this.taskActiveColor;
 
