@@ -130,8 +130,7 @@ export default {
         align-items: center;
         flex-direction: row;
 
-        > * {
-            padding: 8px;
+        .button {
             margin-left: 10px;
         }
     }

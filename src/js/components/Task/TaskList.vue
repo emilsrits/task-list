@@ -1,9 +1,9 @@
 <template>
     <div>
         <div class="task-panel">
-            <form @submit="handleTaskSubmit">
+            <form @submit="handleTaskSubmit" class="task-form">
                 <input 
-                    class="task-title-input" 
+                    class="task-form-input" 
                     type="text" 
                     name="title" 
                     autocomplete="off"
@@ -17,20 +17,27 @@
             </form>
         </div>
 
-        <div>
-            <draggable 
-                tag="ul" 
-                :list="localTasks" 
-                v-bind="getDragOptions" 
-                @change="handleTaskListOrderChange"
-            >
-                <li 
-                    v-for="(task, i) in localTasks" 
-                    :key="i"
+        <div class="tasks">
+            <template v-if="localTasks.length">
+                <draggable 
+                    tag="ul" 
+                    :list="localTasks" 
+                    v-bind="getDragOptions" 
+                    @change="handleTaskListOrderChange"
                 >
-                    <task-list-item :task="task"/>
-                </li>
-            </draggable>
+                    <li 
+                        v-for="(task, i) in localTasks" 
+                        :key="i"
+                    >
+                        <task-list-item :task="task"/>
+                    </li>
+                </draggable>
+            </template>
+            <template v-else>
+                <div class="tasks-none">
+                    <p>What your goal for today?</p>
+                </div>
+            </template>
         </div>
     </div>
 </template>
@@ -104,22 +111,28 @@ export default {
 <style lang="scss" scoped>
 @import "@styles/variables.scss";
 
-.task-panel form {
+.task-form {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-direction: row;
     padding: 5px 0;
 
-    .task-title-input {
+    &-input {
         margin-right: 5px;
         padding: 3px 8px;
         width: 100%;
         height: 22px;
     }
+}
 
-    .button-add {
-        padding: 8px;
+.tasks-none {
+    margin: 20px 0;
+
+    p {
+        margin: 0;
+        color: $color-font-secondary;
+        text-align: center;
     }
 }
 
