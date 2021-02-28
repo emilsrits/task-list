@@ -1,6 +1,3 @@
-# Task list
+# Task List
 
-TODO: 
-* Notifications
-* Reminders
-* Group by project
+![Task List](screenshot.png "Task List")
