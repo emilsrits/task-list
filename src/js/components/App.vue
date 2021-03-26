@@ -38,8 +38,8 @@ export default {
 
 .container {
     padding: 10px 14px;
-    min-width: 480px;
-    max-width: 480px;
+    min-width: 520px;
+    max-width: 520px;
     background: $color-background;
 }
 </style>

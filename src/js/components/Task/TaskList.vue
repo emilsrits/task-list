@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="task-list">
         <div class="task-panel">
             <form @submit="handleTaskSubmit" class="task-form">
                 <input 

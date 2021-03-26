@@ -39,7 +39,7 @@ export const Settings = {
             max: 60
         },
         'description': {
-            max: 240
+            max: 280
         }
     }
 };
