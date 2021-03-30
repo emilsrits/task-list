@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { Settings } from '@config/const';
+import { SETTINGS } from '@config/const';
 
 export default {
     name: 'ColorPicker',
@@ -22,7 +22,7 @@ export default {
 
     data () {
         return {
-            colors: Settings.COLORS,
+            colors: SETTINGS.COLORS,
         }
     },
 

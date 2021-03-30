@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import { Settings } from '@config/const';
+import { SETTINGS } from '@config/const';
 
 export default {
     name: 'TaskListItem',
@@ -110,11 +110,15 @@ export default {
         },
 
         styleColorLabel() {
-            if (Settings.COLORS.hasOwnProperty(this.task.color)) {
-                let color = Settings.COLORS[this.task.color].code;
+            const taskColor = this.task.color 
+                ? this.task.color.toUpperCase() 
+                : null;
+
+            if (SETTINGS.COLORS.hasOwnProperty(taskColor)) {
+                const colorHex = SETTINGS.COLORS[taskColor].code;
 
                 return {
-                    borderLeft: '3px solid ' + color
+                    borderLeft: `3px solid ${colorHex}`
                 }
             }
 

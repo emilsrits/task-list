@@ -1,6 +1,6 @@
 <template>
     <form 
-        @submit="handleTaskUpdate" 
+        @submit.prevent="handleTaskUpdate" 
         @change="handleInputChange" 
         class="form"
     >
@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import { Settings } from '@config/const';
+import { SETTINGS } from '@config/const';
 import ColorPicker from '@components/Widgets/ColorPicker';
 
 export default {
@@ -82,8 +82,8 @@ export default {
             taskTime: this.$store.state.currentTask.time,
             taskDescription: this.$store.state.currentTask.description,
             taskActiveColor: this.$store.state.currentTask.color,
-            titleMax: Settings.INPUT_VALIDATE.title.max,
-            descriptionMax: Settings.INPUT_VALIDATE.description.max
+            titleMax: SETTINGS.INPUT_VALIDATE.TITLE.max,
+            descriptionMax: SETTINGS.INPUT_VALIDATE.DESCRIPTION.max
         }
     },
 
@@ -100,11 +100,11 @@ export default {
     },
 
     methods: {
-        handleShowTasks(event) {
+        handleShowTasks() {
             this.$store.dispatch('openTaskList');
         },
 
-        handleInputChange(event) {
+        handleInputChange() {
             this.taskTitle = this.$refs.title.value.trim();
             this.taskDate = this.$refs.date.value;
             this.taskTime = this.$refs.time.value;
@@ -115,10 +115,9 @@ export default {
             this.taskActiveColor = color;
         },
 
-        handleTaskUpdate(event) {
-            event.preventDefault();
-
+        handleTaskUpdate() {
             const titleLength = this.taskTitle.length;
+
             if (titleLength > 0 && titleLength <= this.titleMax) {
                 this.task.title = this.taskTitle;
             }

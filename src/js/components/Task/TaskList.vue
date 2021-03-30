@@ -1,7 +1,7 @@
 <template>
     <div class="task-list">
         <div class="task-panel">
-            <form @submit="handleTaskSubmit" class="task-form">
+            <form @submit.prevent="handleTaskSubmit" class="task-form">
                 <input 
                     class="task-form-input" 
                     type="text" 
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { Settings } from '@config/const';
+import { SETTINGS } from '@config/const';
 import draggable from 'vuedraggable';
 import TaskListItem from '@components/Task/TaskListItem.vue';
 
@@ -58,7 +58,7 @@ export default {
     data () {
         return {
             localTasks: this.$store.state.tasks,
-            titleMax: Settings.INPUT_VALIDATE.title.max
+            titleMax: SETTINGS.INPUT_VALIDATE.TITLE.max
         }
     },
 
@@ -75,12 +75,10 @@ export default {
 
     methods: {
         handleTaskSubmit(event) {
-            event.preventDefault();
+            const el = event.target;
 
-            let el = event.target;
-
-            let title = el.elements.title.value.trim();
-            let titleLength = title.length;
+            const title = el.elements.title.value.trim();
+            const titleLength = title.length;
 
             if (titleLength > 0 && titleLength <= this.titleMax) {
                 let task = {
