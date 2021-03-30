@@ -33,7 +33,6 @@ export const SETTINGS = {
             code: '#a3a3a3'
         }
     },
-
     INPUT_VALIDATE: {
         TITLE: {
             max: 60
