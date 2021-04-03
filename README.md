@@ -2,6 +2,18 @@
 
 ![Task List](screenshot.png "Task List")
 
+# Features
+
+- Drag & Drop ordering
+- Link wrapping either by full URL or markdown style `[text](url)`
+
+Possible future features:
+
+- Notifications or remainders about task due date/time
+- List export and import
+- Repeatable tasks, e.g. daily / weekly / custom date
+- Theme selection dark/light or own custom color theme
+
 # Installation / Setup
 
 ## Compiling assets
