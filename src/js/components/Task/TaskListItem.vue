@@ -21,7 +21,10 @@
 
             <div class="task-panel-right">
                 <div class="task-header">
-                    <h4 class="task-title">{{ task.title }}</h4>
+                    <h4 
+                        v-html="titleFormatted" 
+                        class="task-title"
+                    ></h4>
 
                     <transition name="slide-fade">
                         <div v-if="showActions" class="task-actions">
@@ -60,6 +63,7 @@
 
 <script>
 import { SETTINGS } from '@config/const';
+import { wrapLinks } from '@utils/helpers'
 
 export default {
     name: 'TaskListItem',
@@ -74,6 +78,10 @@ export default {
     },
 
     computed: {
+        titleFormatted() {
+            return wrapLinks(this.task.title);
+        },
+
         dateFormatted() {
             let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             let datetime = this.task.date;
@@ -98,15 +106,7 @@ export default {
         },
 
         descriptionFormatted() {
-            const linkRegex = /\[(.+)\]\(((https|http)?:\/\/[^\s]+)\)|((https|http)?:\/\/[^\s]+)/gi;
-            
-            return this.task.description.replace(linkRegex, (match, p1, p2) => {
-                if (match && (p1 && p2)) {
-                    return `<a href="${p2}" target="_blank">${p1}</a>`;
-                } else if (match) {
-                    return `<a href="${match}" target="_blank">${match}</a>`;
-                }
-            });
+            return wrapLinks(this.task.description);
         },
 
         styleColorLabel() {
