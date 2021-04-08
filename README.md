@@ -18,7 +18,8 @@ Possible future features:
 
 ## Compiling assets
 
-Run `npm run production` or `npm run dev`, `npm run watch`
+1. Install dependencies `npm install`
+2. Run `npm run production` or `npm run dev`, `npm run watch`
 
 ## Adding extension to Chrome
 
