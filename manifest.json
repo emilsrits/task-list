@@ -15,8 +15,20 @@
     "default_popup": "app.html"
   },
 
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true,
+    "browser_style": true
+  },
+
   "permissions": ["storage", "unlimitedStorage", "history"],
 
-  "content_security_policy": "script-src 'self'; object-src 'self';"
+  "content_security_policy": "script-src 'self'; object-src 'self';",
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{c2f91fbb-c7fb-4ed0-abe2-59b30cff591b}"
+    }
+  }
 
 }

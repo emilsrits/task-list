@@ -1,0 +1,22 @@
+body {
+    color: $color-white;
+    background: $color-background;
+}
+
+header,
+main {
+    margin: 20px auto 0;
+    max-width: 720px;
+}
+
+.status-box {
+    display: none;
+
+    &.is-visible {
+        display: inline-flex;
+        margin: 20px 0;
+        padding: 10px;
+        border: 1px solid $color-black;
+        background: $color-blue;
+    }
+}

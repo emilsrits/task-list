@@ -1,7 +1,6 @@
-// Imports
 @import '~normalize.css/normalize.css';
-@import 'variables';
-@import 'base';
-@import 'buttons';
-@import 'icons';
-@import 'input';
+@import '_variables';
+@import 'app/_base';
+@import 'app/_buttons';
+@import 'app/_icons';
+@import 'app/_input';

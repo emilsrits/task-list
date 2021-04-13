@@ -1,9 +1,9 @@
 <template>
     <div class="color-picker">
-        <div 
-            v-for="(color, index) in colors" 
-            :key="index" 
-            :class="[{ 'is-active': isActiveColor(index) }, 'color']" 
+        <div
+            v-for="(color, index) in colors"
+            :key="index"
+            :class="[{ 'is-active': isActiveColor(index) }, 'color']"
             :style="{ background: color.code }"
             @click="handleColorPick(index)"
         ></div>
@@ -11,19 +11,19 @@
 </template>
 
 <script>
-import { SETTINGS } from '@config/const';
+import { CONFIG } from '@config/const';
 
 export default {
     name: 'ColorPicker',
 
     props: {
-        activeColor: String
+        activeColor: String,
     },
 
-    data () {
+    data() {
         return {
-            colors: SETTINGS.COLORS,
-        }
+            colors: CONFIG.COLORS,
+        };
     },
 
     methods: {
@@ -39,13 +39,13 @@ export default {
             }
 
             this.$emit('colorPicked', chosenColor);
-        }
-    }
-}
+        },
+    },
+};
 </script>
 
 <style lang="scss" scoped>
-@import "@styles/variables.scss";
+@import '@styles/_variables.scss';
 
 .color-picker {
     display: flex;

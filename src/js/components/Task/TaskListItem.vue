@@ -1,41 +1,37 @@
 <template>
-    <div 
-        :class="['task', { 'task-done': task.done }]" 
-        @mouseenter="handleMouseEnter" 
-        @mouseleave="handleMouseLeave"
+    <div
+        :class="['task', { 'task-done': task.done }]"
         :style="styleColorLabel"
+        @mouseenter="handleMouseEnter"
+        @mouseleave="handleMouseLeave"
     >
         <div class="task-panel">
             <div class="task-panel-left">
                 <div class="checkbox">
-                    <input 
-                        type="checkbox" 
-                        :id="task.id" 
-                        :name="task.id" 
+                    <input
+                        type="checkbox"
+                        :id="task.id"
+                        :name="task.id"
                         :checked="task.done"
                         @change="handleTaskCheck"
-                    >
+                    />
                     <label :for="task.id"></label>
                 </div>
             </div>
 
             <div class="task-panel-right">
                 <div class="task-header">
-                    <h4 
-                        v-html="titleFormatted" 
-                        class="task-title"
-                    ></h4>
+                    <h4 v-html="titleFormatted" class="task-title"></h4>
 
                     <transition name="slide-fade">
                         <div v-if="showActions" class="task-actions">
-                            <button 
-                                class="icon-pencil2 button button-edit" 
-                                type="button" 
+                            <button
+                                class="icon-pencil2 button button-edit"
                                 @click="handleTaskEdit"
                             ></button>
-                            <button 
-                                class="icon-minus button button-delete" 
-                                type="button" 
+                            <button
+                                v-if="showDelete"
+                                class="icon-minus button button-delete"
                                 @click="handleTaskDelete"
                             ></button>
                         </div>
@@ -44,7 +40,10 @@
             </div>
         </div>
 
-        <div v-if="task.date && !task.done" :class="[{ 'is-due': isTaskDue }, 'task-date']">
+        <div
+            v-if="task.date && !task.done"
+            :class="[{ 'is-due': isTaskDue }, 'task-date']"
+        >
             <span class="icon icon-clock"></span>
             <span>{{ dateFormatted }}</span>
         </div>
@@ -62,19 +61,21 @@
 </template>
 
 <script>
-import { SETTINGS } from '@config/const';
-import { wrapLinks } from '@utils/helpers'
+import { CONFIG } from '@config/const';
+import { wrapLinks } from '@utils/helpers';
+import { getOption } from '@utils/user-options';
 
 export default {
     name: 'TaskListItem',
 
     props: ['task'],
 
-    data () {
+    data() {
         return {
             showActions: false,
-            showHandle: false
-        }
+            showDelete: false,
+            showHandle: false,
+        };
     },
 
     computed: {
@@ -83,9 +84,14 @@ export default {
         },
 
         dateFormatted() {
-            let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            let options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+            };
             let datetime = this.task.date;
-            
+
             if (this.task.time) {
                 options = { ...options, hour: '2-digit', minute: '2-digit' };
                 datetime = `${this.task.date}T${this.task.time}`;
@@ -99,8 +105,11 @@ export default {
         isTaskDue() {
             const today = new Date();
             const due = new Date(this.task.date);
-            
-            const dateDifference = parseInt((due - today) / (1000 * 60 * 60 * 24), 10);
+
+            const dateDifference = parseInt(
+                (due - today) / (1000 * 60 * 60 * 24),
+                10
+            );
 
             return dateDifference < 1;
         },
@@ -110,20 +119,25 @@ export default {
         },
 
         styleColorLabel() {
-            const taskColor = this.task.color 
-                ? this.task.color.toUpperCase() 
+            const taskColor = this.task.color
+                ? this.task.color.toUpperCase()
                 : null;
 
-            if (SETTINGS.COLORS.hasOwnProperty(taskColor)) {
-                const colorHex = SETTINGS.COLORS[taskColor].code;
+            if (CONFIG.COLORS.hasOwnProperty(taskColor)) {
+                const colorHex = CONFIG.COLORS[taskColor].code;
 
                 return {
-                    borderLeft: `3px solid ${colorHex}`
-                }
+                    borderLeft: `3px solid ${colorHex}`,
+                };
             }
 
             return null;
-        }
+        },
+    },
+
+    created() {
+        getOption(CONFIG.OPTIONS.NAMES.QUICK_DELETE)
+            .then(option => this.showDelete = option);
     },
 
     methods: {
@@ -137,25 +151,25 @@ export default {
             this.showHandle = false;
         },
 
-        handleTaskCheck(event) {
+        handleTaskCheck() {
             this.task.done = !this.task.done;
 
             this.$store.dispatch('updateTask', this.task);
         },
 
-        handleTaskEdit(event) {
+        handleTaskEdit() {
             this.$store.dispatch('openTaskEdit', this.task);
         },
 
-        handleTaskDelete(event) {
+        handleTaskDelete() {
             this.$store.dispatch('deleteTask', this.task.id);
-        }
-    }
-}
+        },
+    },
+};
 </script>
 
 <style lang="scss" scoped>
-@import "@styles/variables.scss";
+@import '@styles/_variables.scss';
 
 .task {
     position: relative;
@@ -209,11 +223,11 @@ export default {
     }
 
     &-description {
-        margin: 2px 0 6px 36px; 
+        margin: 2px 0 6px 36px;
 
         p {
             margin: 0;
-            font-size: 0.875em;
+            font-size: 14px;
             line-height: 1.4;
             white-space: pre-wrap;
             word-break: break-word;
@@ -223,7 +237,7 @@ export default {
     &-date {
         margin: 5px 0 8px 36px;
         color: $color-font-secondary;
-        font-size: 0.7em;
+        font-size: 11px;
 
         &.is-due {
             color: $color-red;
@@ -235,7 +249,7 @@ export default {
     }
 
     &-done {
-        .task-title, 
+        .task-title,
         .task-description {
             text-decoration: line-through;
             opacity: 0.5;
@@ -263,14 +277,14 @@ export default {
 }
 
 .slide-fade-enter-active {
-    transition: all .2s ease;
+    transition: all 0.2s ease;
 }
 
 .slide-fade-leave-active {
-    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
-.slide-fade-enter, 
+.slide-fade-enter,
 .slide-fade-leave-to {
     transform: translateX(10px);
     opacity: 0;

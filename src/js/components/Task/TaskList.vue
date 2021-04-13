@@ -2,34 +2,32 @@
     <div class="task-list">
         <div class="task-panel">
             <form @submit.prevent="handleTaskSubmit" class="task-form">
-                <input 
-                    class="task-form-input" 
-                    type="text" 
-                    name="title" 
+                <input
+                    class="task-form-input"
+                    type="text"
+                    name="title"
                     autocomplete="off"
                     :maxlength="titleMax"
-                >
-                <button 
-                    class="icon-plus button button-add" 
+                />
+                <button
+                    class="icon-plus button button-add"
                     type="submit"
-                >
-                </button>
+                ></button>
             </form>
+
+            <menu-dropdown />
         </div>
 
         <div class="tasks">
             <template v-if="localTasks.length">
-                <draggable 
-                    tag="ul" 
-                    :list="localTasks" 
-                    v-bind="dragOptions" 
+                <draggable
+                    tag="ul"
+                    :list="localTasks"
+                    v-bind="dragOptions"
                     @change="handleTaskListOrderChange"
                 >
-                    <li 
-                        v-for="(task, i) in localTasks" 
-                        :key="i"
-                    >
-                        <task-list-item :task="task"/>
+                    <li v-for="(task, i) in localTasks" :key="i">
+                        <task-list-item :task="task" />
                     </li>
                 </draggable>
             </template>
@@ -43,8 +41,9 @@
 </template>
 
 <script>
-import { SETTINGS } from '@config/const';
+import { CONFIG } from '@config/const';
 import draggable from 'vuedraggable';
+import MenuDropdown from '@components/Menu/MenuDropdown.vue';
 import TaskListItem from '@components/Task/TaskListItem.vue';
 
 export default {
@@ -52,14 +51,15 @@ export default {
 
     components: {
         draggable,
-        TaskListItem
+        MenuDropdown,
+        TaskListItem,
     },
 
-    data () {
+    data() {
         return {
             localTasks: this.$store.state.tasks,
-            titleMax: SETTINGS.INPUT_VALIDATE.TITLE.max
-        }
+            titleMax: CONFIG.INPUT_VALIDATE.TITLE.max,
+        };
     },
 
     computed: {
@@ -68,9 +68,20 @@ export default {
                 animation: 0,
                 disabled: false,
                 ghostClass: 'ghost',
-                handle: '.handle'
+                handle: '.handle',
+            };
+        },
+    },
+
+    mounted() {
+        this.$store.subscribe((mutation, state) => {
+            if (
+                mutation.type === 'SET_TASK_LIST' ||
+                mutation.type === 'ADD_TASK'
+            ) {
+                this.localTasks = state.tasks;
             }
-        }
+        });
     },
 
     methods: {
@@ -81,9 +92,9 @@ export default {
             const titleLength = title.length;
 
             if (titleLength > 0 && titleLength <= this.titleMax) {
-                let task = {
-                    title: el.elements.title.value
-                }
+                const task = {
+                    title: el.elements.title.value,
+                };
 
                 this.$store.dispatch('addTask', task);
 
@@ -95,37 +106,34 @@ export default {
             this.$store.dispatch('updateTaskListOrder');
         },
     },
-
-    mounted () {
-        this.$store.subscribe((mutation, state) => {
-            if (mutation.type === 'SET_TASK_LIST' || mutation.type === 'ADD_TASK') {
-                this.localTasks = state.tasks;
-            }
-        });
-    }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import "@styles/variables.scss";
+@import '@styles/_variables.scss';
 
-.task-form {
+.task-panel {
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: row;
-    padding: 5px 0;
 
-    &-input {
-        margin-right: 5px;
-        padding: 3px 8px;
-        width: 100%;
-        height: 22px;
+    .task-form {
+        flex: 1 0 0;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: row;
+        padding: 5px 0;
+
+        &-input {
+            margin-right: 5px;
+            padding: 3px 8px;
+            width: 100%;
+            height: 22px;
+        }
     }
 }
 
 .tasks-none {
-    margin: 20px 0;
+    margin: 25px 0;
 
     p {
         margin: 0;

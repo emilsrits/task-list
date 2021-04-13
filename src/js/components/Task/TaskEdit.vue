@@ -1,62 +1,67 @@
 <template>
-    <form 
-        @submit.prevent="handleTaskUpdate" 
-        @change="handleInputChange" 
+    <form
+        @submit.prevent="handleTaskUpdate"
+        @change="handleInputChange"
         class="form"
     >
         <span class="form-label">Title</span>
-        <input 
+        <input
             ref="title"
-            type="text" 
-            name="title" 
-            :value="taskTitle" 
+            type="text"
+            name="title"
+            :value="taskTitle"
             :maxlength="titleMax"
             autocomplete="off"
             spellcheck="false"
-        >
+        />
 
         <span class="form-label">Date</span>
         <div class="input-group">
-            <input 
+            <input
                 ref="date"
-                type="date" 
-                name="date" 
+                type="date"
+                name="date"
                 :min="minDateSelect"
                 :value="taskDate"
-            >
+            />
             <input 
-                ref="time"
+                ref="time" 
                 type="time" 
-                name="time"
-                :value="taskTime"
-            >
+                name="time" 
+                :value="taskTime" 
+            />
         </div>
 
         <span class="form-label">Description</span>
-        <textarea 
+        <textarea
             ref="description"
-            name="description" 
-            cols="10" 
-            rows="6" 
+            name="description"
+            cols="10"
+            rows="6"
             :value="taskDescription"
             :maxlength="descriptionMax"
             spellcheck="false"
         ></textarea>
 
         <span class="form-label">Color label</span>
-        <color-picker 
-            :active-color="taskActiveColor" 
+        <color-picker
+            :active-color="taskActiveColor"
             @colorPicked="handleColorPicked"
         />
 
         <div class="form-action">
-            <button 
-                class="icon-undo2 button button-edit" 
-                type="button" 
+            <button
+                class="icon-minus button button-delete"
+                @click="handleTaskDelete"
+            ></button>
+            <span class="separator"></span>
+            <button
+                class="icon-undo2 button button-edit"
+                type="button"
                 @click="handleShowTasks"
             ></button>
-            <button 
-                class="icon-floppy-disk button button-add" 
+            <button
+                class="icon-floppy-disk button button-add"
                 type="submit"
             ></button>
         </div>
@@ -64,17 +69,17 @@
 </template>
 
 <script>
-import { SETTINGS } from '@config/const';
+import { CONFIG } from '@config/const';
 import ColorPicker from '@components/Widgets/ColorPicker';
 
 export default {
     name: 'TaskEdit',
 
     components: {
-        ColorPicker
+        ColorPicker,
     },
 
-    data () {
+    data() {
         return {
             task: this.$store.state.currentTask,
             taskTitle: this.$store.state.currentTask.title,
@@ -82,9 +87,9 @@ export default {
             taskTime: this.$store.state.currentTask.time,
             taskDescription: this.$store.state.currentTask.description,
             taskActiveColor: this.$store.state.currentTask.color,
-            titleMax: SETTINGS.INPUT_VALIDATE.TITLE.max,
-            descriptionMax: SETTINGS.INPUT_VALIDATE.DESCRIPTION.max
-        }
+            titleMax: CONFIG.INPUT_VALIDATE.TITLE.max,
+            descriptionMax: CONFIG.INPUT_VALIDATE.DESCRIPTION.max,
+        };
     },
 
     computed: {
@@ -92,11 +97,11 @@ export default {
             const date = new Date(new Date().getFullYear(), 0, 1);
 
             const yyyy = date.getFullYear();
-            const mm = String(date.getMonth() + 1).padStart(2, "0");
-            const dd = String(date.getDate()).padStart(2, "0");
+            const mm = String(date.getMonth() + 1).padStart(2, '0');
+            const dd = String(date.getDate()).padStart(2, '0');
 
             return `${yyyy}-${mm}-${dd}`;
-        }
+        },
     },
 
     methods: {
@@ -128,13 +133,18 @@ export default {
             this.task.color = this.taskActiveColor;
 
             this.$store.dispatch('updateTask', this.task);
-        }
-    }
-}
+        },
+
+        handleTaskDelete() {
+            this.$store.dispatch('deleteTask', this.task.id);
+            this.$store.dispatch('openTaskList');
+        },
+    },
+};
 </script>
 
 <style lang="scss" scoped>
-@import "@styles/variables.scss";
+@import '@styles/_variables.scss';
 
 .form {
     > * {
@@ -144,7 +154,7 @@ export default {
 
     &-label {
         color: $color-font;
-        font-size: 0.8em;
+        font-size: 14px;
         font-weight: bold;
         vertical-align: super;
     }
@@ -158,6 +168,23 @@ export default {
         .button {
             margin-left: 10px;
         }
+    }
+}
+
+.separator {
+    &::before {
+        content: "|";
+        margin-left: 10px;
+        color: $color-font-secondary;
+    }
+}
+
+.button-delete {
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+        opacity: 1;
     }
 }
 </style>

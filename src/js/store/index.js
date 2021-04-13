@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import menu from './modules/menu';
 
 import { default as db } from '@api/DBService';
 
@@ -8,38 +9,6 @@ Vue.use(Vuex);
 const state = {
     tasks: [],
     currentTask: null
-};
-
-const mutations = {
-    SET_TASK_LIST(state, payload) {
-        state.tasks = payload;
-    },
-
-    ADD_TASK(state, payload) {
-        state.tasks.unshift(payload);
-    },
-
-    DELETE_TASK(state, payload) {
-        state.tasks.splice(
-            state.tasks.findIndex(i => i.id == payload), 
-            1
-        );
-    },
-
-    OPEN_TASK_EDIT(state, payload) {
-        state.currentTask = payload;
-    },
-
-    OPEN_TASK_LIST(state) {
-        state.currentTask = null;
-    },
-
-    UPDATE_TASK_LIST_ORDER(state) {
-        state.tasks.map((task, index) => {
-            task.order = index + 1;
-            db.updateTask(task);
-        });
-    }
 };
 
 const actions = {
@@ -88,7 +57,42 @@ const actions = {
     }
 };
 
+const mutations = {
+    SET_TASK_LIST(state, payload) {
+        state.tasks = payload;
+    },
+
+    ADD_TASK(state, payload) {
+        state.tasks.unshift(payload);
+    },
+
+    DELETE_TASK(state, payload) {
+        state.tasks.splice(
+            state.tasks.findIndex(i => i.id == payload), 
+            1
+        );
+    },
+
+    OPEN_TASK_EDIT(state, payload) {
+        state.currentTask = payload;
+    },
+
+    OPEN_TASK_LIST(state) {
+        state.currentTask = null;
+    },
+
+    UPDATE_TASK_LIST_ORDER(state) {
+        state.tasks.map((task, index) => {
+            task.order = index + 1;
+            db.updateTask(task);
+        });
+    }
+};
+
 export default new Vuex.Store({
+    modules: {
+        menu
+    },
     state,
     mutations,
     actions

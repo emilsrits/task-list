@@ -1,4 +1,4 @@
-export const SETTINGS = {
+export const CONFIG = {
     COLORS: {
         RED: {
             color: 'red',
@@ -39,6 +39,14 @@ export const SETTINGS = {
         },
         DESCRIPTION: {
             max: 280
+        }
+    },
+    OPTIONS: {
+        NAMES: {
+            QUICK_DELETE: 'quick_delete'
+        },
+        DEFAULTS: {
+            'quick_delete': true
         }
     }
 };
