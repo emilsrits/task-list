@@ -1,7 +1,7 @@
 {
   "name": "task-list",
   "version": "1.0.0",
-  "description": "To-Do list with reminders and grouping.",
+  "description": "Task list extension for Chrome and Firefox browsers",
   "main": "app.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
