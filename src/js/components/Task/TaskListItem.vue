@@ -265,6 +265,7 @@ export default {
     height: 10px;
     transition: opacity 0.3s ease;
     cursor: grab;
+    user-select: none;
 
     &:not(.is-visible) {
         opacity: 0;
