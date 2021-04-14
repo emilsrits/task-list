@@ -23,7 +23,10 @@ export default {
     },
 
     methods: {
-        ...mapActions(['toggleMenu', 'closeMenu']),
+        ...mapActions([
+            'toggleMenu',
+            'closeMenu'
+        ]),
 
         handleMenuOptions() {
             chrome.runtime.openOptionsPage();

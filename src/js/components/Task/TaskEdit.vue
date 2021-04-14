@@ -58,7 +58,7 @@
             <button
                 class="icon-undo2 button button-edit"
                 type="button"
-                @click="handleShowTasks"
+                @click="openTaskList"
             ></button>
             <button
                 class="icon-floppy-disk button button-add"
@@ -69,6 +69,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import { CONFIG } from '@config/const';
 import ColorPicker from '@components/Widgets/ColorPicker';
 
@@ -81,12 +82,12 @@ export default {
 
     data() {
         return {
-            task: this.$store.state.currentTask,
-            taskTitle: this.$store.state.currentTask.title,
-            taskDate: this.$store.state.currentTask.date,
-            taskTime: this.$store.state.currentTask.time,
-            taskDescription: this.$store.state.currentTask.description,
-            taskActiveColor: this.$store.state.currentTask.color,
+            task: this.$store.state.task.currentTask,
+            taskTitle: this.$store.state.task.currentTask.title,
+            taskDate: this.$store.state.task.currentTask.date,
+            taskTime: this.$store.state.task.currentTask.time,
+            taskDescription: this.$store.state.task.currentTask.description,
+            taskActiveColor: this.$store.state.task.currentTask.color,
             titleMax: CONFIG.INPUT_VALIDATE.TITLE.max,
             descriptionMax: CONFIG.INPUT_VALIDATE.DESCRIPTION.max,
         };
@@ -105,9 +106,7 @@ export default {
     },
 
     methods: {
-        handleShowTasks() {
-            this.$store.dispatch('openTaskList');
-        },
+        ...mapActions(['openTaskList']),
 
         handleInputChange() {
             this.taskTitle = this.$refs.title.value.trim();

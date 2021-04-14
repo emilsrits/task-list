@@ -153,7 +153,6 @@ export default {
 
         handleTaskCheck() {
             this.task.done = !this.task.done;
-
             this.$store.dispatch('updateTask', this.task);
         },
 

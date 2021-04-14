@@ -6,6 +6,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import * as types from '@store/mutation-types';
 import TaskList from '@components/Task/TaskList.vue';
 import TaskEdit from '@components/Task/TaskEdit.vue';
 
@@ -26,11 +27,11 @@ export default {
         this.$store.dispatch('setTaskList');
 
         this.$store.subscribe((mutation, state) => {
-            if (mutation.type === 'OPEN_TASK_EDIT') {
+            if (mutation.type === types.OPEN_TASK_EDIT) {
                 this.currentTab = TaskEdit;
             }
 
-            if (mutation.type === 'OPEN_TASK_LIST') {
+            if (mutation.type === types.OPEN_TASK_LIST) {
                 this.currentTab = TaskList;
             }
         });

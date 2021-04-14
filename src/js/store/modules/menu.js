@@ -1,3 +1,5 @@
+import * as types from '@store/mutation-types';
+
 const state = {
     isOpen: false
 }
@@ -10,20 +12,20 @@ const getters = {
 
 const actions = {
     toggleMenu(context) {
-        context.commit('TOGGLE_MENU');
+        context.commit(types.TOGGLE_MENU);
     },
 
     closeMenu(context) {
-        context.commit('CLOSE_MENU');
+        context.commit(types.CLOSE_MENU);
     }
 }
 
 const mutations = {
-    TOGGLE_MENU(state) {
+    [types.TOGGLE_MENU](state) {
         state.isOpen = !state.isOpen;
     },
 
-    CLOSE_MENU(state) {
+    [types.CLOSE_MENU](state) {
         state.isOpen = false;
     }
 }
@@ -33,4 +35,4 @@ export default {
     getters,
     actions,
     mutations
-}
+};

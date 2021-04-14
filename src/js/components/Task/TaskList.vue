@@ -19,14 +19,14 @@
         </div>
 
         <div class="tasks">
-            <template v-if="localTasks.length">
+            <template v-if="tasks.length">
                 <draggable
                     tag="ul"
-                    :list="localTasks"
+                    :list="tasks"
                     v-bind="dragOptions"
-                    @change="handleTaskListOrderChange"
+                    @change="updateTaskListOrder"
                 >
-                    <li v-for="(task, i) in localTasks" :key="i">
+                    <li v-for="(task, i) in tasks" :key="i">
                         <task-list-item :task="task" />
                     </li>
                 </draggable>
@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
 import { CONFIG } from '@config/const';
 import draggable from 'vuedraggable';
 import MenuDropdown from '@components/Menu/MenuDropdown.vue';
@@ -57,12 +58,13 @@ export default {
 
     data() {
         return {
-            localTasks: this.$store.state.tasks,
             titleMax: CONFIG.INPUT_VALIDATE.TITLE.max,
         };
     },
 
     computed: {
+        ...mapState({ tasks: state => state.task.tasks }),
+
         dragOptions() {
             return {
                 animation: 0,
@@ -73,18 +75,9 @@ export default {
         },
     },
 
-    mounted() {
-        this.$store.subscribe((mutation, state) => {
-            if (
-                mutation.type === 'SET_TASK_LIST' ||
-                mutation.type === 'ADD_TASK'
-            ) {
-                this.localTasks = state.tasks;
-            }
-        });
-    },
-
     methods: {
+        ...mapActions(['updateTaskListOrder']),
+
         handleTaskSubmit(event) {
             const el = event.target;
 
@@ -100,10 +93,6 @@ export default {
 
                 el.elements.title.value = null;
             }
-        },
-
-        handleTaskListOrderChange() {
-            this.$store.dispatch('updateTaskListOrder');
         },
     },
 };
