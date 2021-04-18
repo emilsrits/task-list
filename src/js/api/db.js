@@ -1,4 +1,6 @@
 import { openDB } from 'idb';
+import { CONFIG } from '@config/const';
+import { getOption } from '@utils/user-options';
 
 const DB_NAME = 'taskDB';
 const DB_VERSION = 1;
@@ -52,15 +54,22 @@ const addTask = async ({ title, done = false }) => {
 
 const addTasks = async (tasks) => {
     const db = await getDb();
-    const tx = db.transaction(DB_STORE_TASKS, 'readwrite');
+    
+    const allowDupes = await getOption(CONFIG.OPTIONS.NAMES.IMPORT_DUPLICATE)
+        .then(option => option)
+        .catch(() => CONFIG.OPTIONS.DEFAULTS.import_duplicate);
 
+    const tx = db.transaction(DB_STORE_TASKS, 'readwrite');
     const promises = [];
  
     for (const task of tasks) {
-        const { id, ...data } = task;
-        promises.push(tx.store.put(data));
+        if (allowDupes) {
+            const { id, ...data } = task;
+            promises.push(tx.store.put(data));
+        } else {
+            promises.push(tx.store.put(task));
+        }
     }
-
     promises.push(tx.done);
 
     return Promise.all(promises);

@@ -43,10 +43,12 @@ export const CONFIG = {
     },
     OPTIONS: {
         NAMES: {
-            QUICK_DELETE: 'quick_delete'
+            QUICK_DELETE: 'quick_delete',
+            IMPORT_DUPLICATE: 'import_duplicate'
         },
         DEFAULTS: {
-            'quick_delete': true
+            'quick_delete': true,
+            'import_duplicate': false
         }
     }
 };

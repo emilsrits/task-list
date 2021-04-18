@@ -16,11 +16,25 @@
     <main>
         <div class="main-options">
             <div class="fieldset">
-                <label>
-                    <input type="checkbox" id="quick-delete">
-                    <span>Quick delete</span>
-                </label>
-                <p>When disabled removes delete button from action bar when hovering over a task.</p>
+                <div class="fieldset-header">Task actions</div>
+                <div class="fieldset-item">
+                    <label>
+                        <input type="checkbox" id="quick-delete">
+                        <span>Quick delete</span>
+                    </label>
+                    <p>Shows a delete button in action bar when hovering over a task.</p>
+                </div>
+            </div>
+
+            <div class="fieldset">
+                <div class="fieldset-header">Export & Import</div>
+                <div class="fieldset-item">
+                    <label>
+                        <input type="checkbox" id="import-duplicate">
+                        <span>Import duplicate tasks</span>
+                    </label>
+                    <p>Creates new task items instead of updating existing ones.</p>
+                </div>
             </div>
         
             <button id="save" class="button button-save">Save</button>
