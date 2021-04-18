@@ -1,0 +1,29 @@
+.button {
+    display: block;
+    margin: 1rem 0;
+    padding: 8px;
+    color: $color-white;
+    border: 1px solid $color-black;
+    background: $color-background-darker;
+    outline: none;
+    cursor: pointer;
+
+    &:hover {
+        background: $color-background-lighter;
+    }
+
+    &-big {
+        padding: 10px;
+        min-width: 160px;
+        text-transform: uppercase;
+        letter-spacing: 1.1px;
+    }
+
+    &-save {
+        background: darken($color-green, 10%);
+    
+        &:hover {
+            background: darken($color-green, 5%);
+        }
+    }
+}

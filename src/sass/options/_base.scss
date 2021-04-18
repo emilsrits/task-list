@@ -9,14 +9,8 @@ main {
     max-width: 720px;
 }
 
-.status-box {
-    display: none;
-
-    &.is-visible {
-        display: inline-flex;
-        margin: 20px 0;
-        padding: 10px;
-        border: 1px solid $color-black;
-        background: $color-blue;
-    }
+hr {
+    margin: 2rem 0;
+    border: 0;
+    border-top: 1px solid $color-font-secondary;
 }

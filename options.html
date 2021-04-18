@@ -14,17 +14,32 @@
     <hr>
 
     <main>
-        <fieldset>
-            <label>
-                <input type="checkbox" id="quick-delete">
-                <span>Quick delete</span>
-            </label>
-            <p>When disabled removes delete button from action bar when hovering over a task.</p>
-        </fieldset>
-    
-        <button id="save">Save</button>
+        <div class="main-options">
+            <div class="fieldset">
+                <label>
+                    <input type="checkbox" id="quick-delete">
+                    <span>Quick delete</span>
+                </label>
+                <p>When disabled removes delete button from action bar when hovering over a task.</p>
+            </div>
+        
+            <button id="save" class="button button-save">Save</button>
 
-        <div id="status" class="status-box"></div>
+            <div id="status" class="status-box"></div>
+        </div>
+
+        <hr>
+
+        <div class="main-actions">
+            <button id="export" class="button button-big">Export tasks</button>
+            <button id="import" class="button button-big">Import tasks...</button>
+
+            <div class="hidden">
+                <input id="import-file" type="file" accept="application/json">
+            </div>
+
+            <div id="status-file" class="status-box"></div>
+        </div>
     </main>
 
     <script src="dist/js/options.js"></script>

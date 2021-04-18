@@ -3,6 +3,7 @@ import { openDB } from 'idb';
 const DB_NAME = 'taskDB';
 const DB_VERSION = 1;
 const DB_STORE_TASKS = 'tasks';
+const DB_TASKS_INDEX_TITLE = 'title';
 
 async function getDb() {
     const db = await openDB(DB_NAME, DB_VERSION, {
@@ -13,7 +14,7 @@ async function getDb() {
                     autoIncrement: true
                 });
     
-                store.createIndex('title', 'title');
+                store.createIndex(DB_TASKS_INDEX_TITLE, DB_TASKS_INDEX_TITLE);
             }
         }
     });
@@ -23,7 +24,7 @@ async function getDb() {
 
 const getAllTasks = async () => {
     const db = await getDb();
-    let tasks = await db.getAll(DB_STORE_TASKS);
+    const tasks = await db.getAll(DB_STORE_TASKS);
     
     tasks.sort((a, b) => {
         return a.order - b.order;
@@ -47,6 +48,22 @@ const addTask = async ({ title, done = false }) => {
     });
     
     return task;
+};
+
+const addTasks = async (tasks) => {
+    const db = await getDb();
+    const tx = db.transaction(DB_STORE_TASKS, 'readwrite');
+
+    const promises = [];
+ 
+    for (const task of tasks) {
+        const { id, ...data } = task;
+        promises.push(tx.store.put(data));
+    }
+
+    promises.push(tx.done);
+
+    return Promise.all(promises);
 };
 
 const updateTask = async ({ id, title, description, date, time, done, color, order }) => {
@@ -76,6 +93,7 @@ export default {
     getAllTasks,
     getTask,
     addTask,
+    addTasks,
     updateTask,
     deleteTask
 }

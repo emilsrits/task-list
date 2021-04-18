@@ -3,7 +3,8 @@
         "baseUrl": "./",
         "paths": {
             "@config/*": ["./src/js/config/*"],
-            "@store/*": ["./src/js/store/*"]
+            "@store/*": ["./src/js/store/*"],
+            "@api/*": ["./src/js/api/*"]
         }
     },
     "exclude": [
