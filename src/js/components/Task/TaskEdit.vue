@@ -35,6 +35,7 @@
         <span class="c-form__label">Description</span>
         <textarea
             ref="description"
+            class="c-form__text"
             name="description"
             cols="10"
             rows="6"
@@ -176,6 +177,10 @@ export default {
         .c-button {
             margin-left: 10px;
         }
+    }
+
+    &__text {
+        font-size: 14px;
     }
 }
 
