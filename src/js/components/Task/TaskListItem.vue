@@ -1,37 +1,38 @@
 <template>
     <div
-        :class="['task', { 'task-done': task.done }]"
+        :class="['c-task', { 'c-task--done': task.done }]"
         :style="styleColorLabel"
         @mouseenter="handleMouseEnter"
         @mouseleave="handleMouseLeave"
     >
-        <div class="task-panel">
-            <div class="task-panel-left">
-                <div class="checkbox">
+        <div class="c-task__panel">
+            <div class="c-task__panel--left">
+                <div class="c-checkbox">
                     <input
-                        type="checkbox"
                         :id="task.id"
+                        class="c-checkbox__input"
                         :name="task.id"
+                        type="checkbox"
                         :checked="task.done"
                         @change="handleTaskCheck"
                     />
-                    <label :for="task.id"></label>
+                    <label class="c-checkbox__label" :for="task.id"></label>
                 </div>
             </div>
 
-            <div class="task-panel-right">
-                <div class="task-header">
-                    <h4 v-html="titleFormatted" class="task-title"></h4>
+            <div class="c-task__panel--right">
+                <div class="c-task__header">
+                    <h4 v-html="titleFormatted" class="c-task__title"></h4>
 
-                    <transition name="slide-fade">
-                        <div v-if="showActions" class="task-actions">
+                    <transition name="h-slide-fade">
+                        <div v-if="showActions" class="c-task__actions">
                             <button
-                                class="icon-pencil2 button button-edit"
+                                class="icon icon--pencil2 c-button c-button--edit"
                                 @click="handleTaskEdit"
                             ></button>
                             <button
                                 v-if="showDelete"
-                                class="icon-minus button button-delete"
+                                class="icon icon--minus c-button c-button--delete"
                                 @click="handleTaskDelete"
                             ></button>
                         </div>
@@ -42,17 +43,17 @@
 
         <div
             v-if="task.date && !task.done"
-            :class="[{ 'is-due': isTaskDue }, 'task-date']"
+            :class="[{ 'c-task__date--due': isTaskDue }, 'c-task__date']"
         >
-            <span class="icon icon-clock"></span>
+            <span class="icon icon--clock"></span>
             <span>{{ dateFormatted }}</span>
         </div>
 
-        <div v-if="task.description" class="task-description">
+        <div v-if="task.description" class="c-task__description">
             <p v-html="descriptionFormatted"></p>
         </div>
 
-        <div :class="[{ 'is-visible': showHandle }, 'handle']">
+        <div :class="['c-task__handle js-handle', { 'c-task__handle--visible': showHandle }]">
             <span>&#8901;</span>
             <span>&#8901;</span>
             <span>&#8901;</span>
@@ -136,8 +137,9 @@ export default {
     },
 
     created() {
-        getOption(CONFIG.OPTIONS.NAMES.QUICK_DELETE)
-            .then(option => this.showDelete = option);
+        getOption(CONFIG.OPTIONS.NAMES.QUICK_DELETE).then(
+            (option) => (this.showDelete = option)
+        );
     },
 
     methods: {
@@ -170,7 +172,8 @@ export default {
 <style lang="scss" scoped>
 @import '@styles/_variables.scss';
 
-.task {
+.c-task {
+    $self: &;
     position: relative;
     padding: 5px 15px 2px;
     background: $color-background-lighter;
@@ -179,49 +182,57 @@ export default {
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
     transition: opacity 0.3s ease;
 
-    &-panel {
+    &--done {
+        #{$self}__title,
+        #{$self}__description {
+            text-decoration: line-through;
+            opacity: 0.5;
+        }
+    }
+
+    &__panel {
         display: flex;
         justify-content: flex-start;
         align-items: center;
 
-        &-left {
+        &--left {
             margin-right: 16px;
         }
 
-        &-right {
+        &--right {
             flex: 1 0 0;
         }
     }
 
-    &-header {
+    &__header {
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
         flex-direction: row;
+    }
 
-        .task-actions {
-            position: absolute;
-            top: 4px;
-            right: 4px;
+    &__actions {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        padding: 4px;
+        text-align: right;
+        background-color: rgba(0, 0, 0, 0.7);
+        border-radius: 3px;
+
+        .c-button {
             padding: 4px;
-            text-align: right;
-            background-color: rgba(0, 0, 0, 0.7);
-            border-radius: 3px;
-
-            .button {
-                padding: 4px;
-                font-size: 10px;
-            }
+            font-size: 10px;
         }
     }
 
-    &-title {
+    &__title {
         margin: 0;
         width: 100%;
         overflow-wrap: break-word;
     }
 
-    &-description {
+    &__description {
         margin: 2px 0 6px 36px;
 
         p {
@@ -233,12 +244,12 @@ export default {
         }
     }
 
-    &-date {
+    &__date {
         margin: 5px 0 8px 36px;
         color: $color-font-secondary;
         font-size: 11px;
 
-        &.is-due {
+        &--due {
             color: $color-red;
         }
 
@@ -247,45 +258,37 @@ export default {
         }
     }
 
-    &-done {
-        .task-title,
-        .task-description {
-            text-decoration: line-through;
-            opacity: 0.5;
+    &__handle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        width: 80px;
+        height: 10px;
+        transition: opacity 0.3s ease;
+        cursor: grab;
+        user-select: none;
+
+        &:not(&--visible) {
+            opacity: 0;
+        }
+
+        span {
+            line-height: 10px;
         }
     }
 }
 
-.handle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-    width: 80px;
-    height: 10px;
-    transition: opacity 0.3s ease;
-    cursor: grab;
-    user-select: none;
-
-    &:not(.is-visible) {
-        opacity: 0;
-    }
-
-    span {
-        line-height: 10px;
-    }
-}
-
-.slide-fade-enter-active {
+.h-slide-fade-enter-active {
     transition: all 0.2s ease;
 }
 
-.slide-fade-leave-active {
+.h-slide-fade-leave-active {
     transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
-.slide-fade-enter,
-.slide-fade-leave-to {
+.h-slide-fade-enter,
+.h-slide-fade-leave-to {
     transform: translateX(10px);
     opacity: 0;
 }

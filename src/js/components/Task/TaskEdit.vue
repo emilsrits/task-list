@@ -2,9 +2,9 @@
     <form
         @submit.prevent="handleTaskUpdate"
         @change="handleInputChange"
-        class="form"
+        class="c-form"
     >
-        <span class="form-label">Title</span>
+        <span class="c-form__label">Title</span>
         <input
             ref="title"
             type="text"
@@ -15,8 +15,8 @@
             spellcheck="false"
         />
 
-        <span class="form-label">Date</span>
-        <div class="input-group">
+        <span class="c-form__label">Date</span>
+        <div class="c-form__group">
             <input
                 ref="date"
                 type="date"
@@ -28,11 +28,11 @@
                 ref="time" 
                 type="time" 
                 name="time" 
-                :value="taskTime" 
+                :value="taskTime"
             />
         </div>
 
-        <span class="form-label">Description</span>
+        <span class="c-form__label">Description</span>
         <textarea
             ref="description"
             name="description"
@@ -43,25 +43,25 @@
             spellcheck="false"
         ></textarea>
 
-        <span class="form-label">Color label</span>
+        <span class="c-form__label">Color label</span>
         <color-picker
             :active-color="taskActiveColor"
             @colorPicked="handleColorPicked"
         />
 
-        <div class="form-action">
+        <div class="c-form__action">
             <button
-                class="icon-minus button button-delete"
+                class="icon icon--minus c-button c-button--delete"
                 @click="handleTaskDelete"
             ></button>
-            <span class="separator"></span>
+            <span class="c-separator"></span>
             <button
-                class="icon-undo2 button button-edit"
+                class="icon icon--undo2 c-button c-button--edit"
                 type="button"
                 @click="openTaskList"
             ></button>
             <button
-                class="icon-floppy-disk button button-add"
+                class="icon icon--floppy-disk c-button c-button--add"
                 type="submit"
             ></button>
         </div>
@@ -145,40 +145,49 @@ export default {
 <style lang="scss" scoped>
 @import '@styles/_variables.scss';
 
-.form {
+.c-form {
     > * {
         margin: 0 0 10px;
         width: 100%;
     }
 
-    &-label {
+    &__label {
         color: $color-font;
         font-size: 14px;
         font-weight: bold;
         vertical-align: super;
     }
 
-    &-action {
+    &__group {
+        display: flex;
+        flex-wrap: wrap;
+
+        > *:not(:first-of-type) {
+            margin-left: 10px;
+        }
+    }
+
+    &__action {
         display: flex;
         justify-content: flex-end;
         align-items: center;
         flex-direction: row;
 
-        .button {
+        .c-button {
             margin-left: 10px;
         }
     }
 }
 
-.separator {
+.c-separator {
     &::before {
-        content: "|";
+        content: '|';
         margin-left: 10px;
         color: $color-font-secondary;
     }
 }
 
-.button-delete {
+.c-button--delete {
     opacity: 0.3;
     transition: opacity 0.3s ease;
 

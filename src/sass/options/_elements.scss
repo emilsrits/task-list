@@ -1,15 +1,10 @@
-.main-options,
-.main-actions {
-    position: relative;
-}
-
-.status-box {
+.c-status {
     position: absolute;
     bottom: 0;
     right: 0;
     display: none;
 
-    &.is-visible {
+    &--visible {
         display: inline-flex;
         padding: 10px;
         border: 1px solid $color-black;
@@ -17,7 +12,7 @@
     }
 }
 
-.fieldset {
+.l-fieldset {
     padding: 8px 8px 8px 0;
     border: none;
 
@@ -25,26 +20,25 @@
         border-bottom: 1px solid $color-background-lighter;
     }
 
-    &-header {
+    &__header {
         margin-bottom: 1.2rem;
         font-size: 16px;
         font-weight: 600;
     }
-
-    label {
-        display: inline-flex;
-        align-items: center;
-
-        > span {
-            margin-left: 8px;
-        }
-    }
-
-    p {
-        color: $color-font-secondary;
-    }
 }
 
-.hidden {
-    display: none;
+.c-field {
+    &__label {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    &__text {
+        margin-left: 8px;
+        user-select: none;
+    }
+
+    &__description {
+        color: $color-font-secondary;
+    }
 }

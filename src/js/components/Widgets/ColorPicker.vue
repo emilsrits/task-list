@@ -1,9 +1,9 @@
 <template>
-    <div class="color-picker">
+    <div class="c-color-picker">
         <div
             v-for="(color, index) in colors"
             :key="index"
-            :class="[{ 'is-active': isActiveColor(index) }, 'color']"
+            :class="['c-color-picker__item', { 'c-color-picker__item--active': isActiveColor(index) }]"
             :style="{ background: color.code }"
             @click="handleColorPick(index)"
         ></div>
@@ -47,13 +47,13 @@ export default {
 <style lang="scss" scoped>
 @import '@styles/_variables.scss';
 
-.color-picker {
+.c-color-picker {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-wrap: wrap;
 
-    .color {
+    &__item {
         margin-bottom: 4px;
         width: 20px;
         height: 20px;
@@ -65,8 +65,8 @@ export default {
             margin-right: 4px;
         }
 
-        &.is-active {
-            border: 2px solid $color-black;
+        &--active {
+            border: 3px solid $color-black;
         }
     }
 }

@@ -1,14 +1,18 @@
 <template>
-    <div class="menu">
-        <div @click="toggleMenu" :class="['menu-toggle', { open: isMenuOpen }]">
+    <div class="c-menu">
+        <div @click="toggleMenu" :class="['c-menu__toggle', { 'c-menu__toggle--open': isMenuOpen }]">
             <span>&#8942;</span>
         </div>
 
-        <ul v-if="isMenuOpen" class="menu-list">
+        <ul v-if="isMenuOpen" class="c-menu__list">
             <li @click="handleMenuOptions">Options</li>
         </ul>
 
-        <div v-if="isMenuOpen" @click="closeMenu" class="menu-backdrop"></div>
+        <div 
+            v-if="isMenuOpen" 
+            class="c-menu__backdrop" 
+            @click="closeMenu"
+        ></div>
     </div>
 </template>
 
@@ -38,14 +42,14 @@ export default {
 <style lang="scss" scoped>
 @import '@styles/_variables.scss';
 
-.menu {
+.c-menu {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     user-select: none;
 
-    &-toggle {
+    &__toggle {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -56,8 +60,8 @@ export default {
         cursor: pointer;
         z-index: 25;
 
-        &:hover,
-        &.open {
+        &--open,
+        &:hover {
             color: $color-font;
             background: $color-background-lighter;
         }
@@ -67,7 +71,7 @@ export default {
         }
     }
 
-    &-list {
+    &__list {
         position: absolute;
         top: 100%;
         right: 0;
@@ -88,7 +92,7 @@ export default {
         }
     }
 
-    &-backdrop {
+    &__backdrop {
         position: fixed;
         top: 0;
         right: 0;

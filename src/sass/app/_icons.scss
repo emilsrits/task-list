@@ -10,7 +10,7 @@
     font-display: block;
 }
 
-[class^="icon-"], [class*=" icon-"] {
+.icon {
     /* use !important to prevent issues with browser extensions that change fonts */
     font-family: '#{$icomoon-font-family}' !important;
     font-style: normal;
@@ -22,52 +22,52 @@
     /* Better Font Rendering =========== */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-}
 
-.icon-pencil2 {
-    &:before {
-        content: $icon-pencil2; 
+    &--pencil2 {
+        &::before {
+            content: $icon-pencil2; 
+        }
     }
-}
-
-.icon-clock {
-    &:before {
-        content: $icon-clock; 
+    
+    &--clock {
+        &::before {
+            content: $icon-clock; 
+        }
     }
-}
-
-.icon-floppy-disk {
-    &:before {
-        content: $icon-floppy-disk; 
+    
+    &--floppy-disk {
+        &::before {
+            content: $icon-floppy-disk; 
+        }
     }
-}
-
-.icon-undo2 {
-    &:before {
-        content: $icon-undo2; 
+    
+    &--undo2 {
+        &::before {
+            content: $icon-undo2; 
+        }
     }
-}
-
-.icon-plus {
-    &:before {
-        content: $icon-plus; 
+    
+    &--plus {
+        &::before {
+            content: $icon-plus; 
+        }
     }
-}
-
-.icon-minus {
-    &:before {
-        content: $icon-minus; 
+    
+    &--minus {
+        &::before {
+            content: $icon-minus; 
+        }
     }
-}
-
-.icon-blocked {
-    &:before {
-        content: $icon-blocked; 
+    
+    &--blocked {
+        &::before {
+            content: $icon-blocked; 
+        }
     }
-}
-
-.icon-checkmark {
-    &:before {
-        content: $icon-checkmark; 
+    
+    &--checkmark {
+        &::before {
+            content: $icon-checkmark; 
+        }
     }
 }

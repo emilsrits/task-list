@@ -1,16 +1,16 @@
 <template>
-    <div class="task-list">
-        <div class="task-panel">
-            <form @submit.prevent="handleTaskSubmit" class="task-form">
+    <div class="c-tasks">
+        <div class="c-tasks__panel">
+            <form @submit.prevent="handleTaskSubmit" class="c-tasks__form">
                 <input
-                    class="task-form-input"
+                    class="c-tasks__input"
                     type="text"
                     name="title"
                     autocomplete="off"
                     :maxlength="titleMax"
                 />
                 <button
-                    class="icon-plus button button-add"
+                    class="icon icon--plus c-button c-button--add"
                     type="submit"
                 ></button>
             </form>
@@ -18,21 +18,26 @@
             <menu-dropdown />
         </div>
 
-        <div class="tasks">
+        <div class="c-tasks__list">
             <template v-if="tasks.length">
                 <draggable
                     tag="ul"
                     :list="tasks"
                     v-bind="dragOptions"
                     @change="updateTaskListOrder"
+                    class="c-draggable-list"
                 >
-                    <li v-for="(task, i) in tasks" :key="i">
+                    <li 
+                        v-for="(task, i) in tasks" 
+                        :key="i" 
+                        class="c-draggable-list__item"
+                    >
                         <task-list-item :task="task" />
                     </li>
                 </draggable>
             </template>
             <template v-else>
-                <div class="tasks-none">
+                <div class="c-tasks__list-message">
                     <p>What your goal for today?</p>
                 </div>
             </template>
@@ -63,14 +68,14 @@ export default {
     },
 
     computed: {
-        ...mapState({ tasks: state => state.task.tasks }),
+        ...mapState({ tasks: (state) => state.task.tasks }),
 
         dragOptions() {
             return {
                 animation: 0,
                 disabled: false,
-                ghostClass: 'ghost',
-                handle: '.handle',
+                ghostClass: 'h-ghost',
+                handle: '.js-handle',
             };
         },
     },
@@ -101,47 +106,49 @@ export default {
 <style lang="scss" scoped>
 @import '@styles/_variables.scss';
 
-.task-panel {
-    display: flex;
+.c-tasks {
+    &__panel {
+        display: flex;
+    }
 
-    .task-form {
+    &__form {
         flex: 1 0 0;
         display: flex;
         justify-content: flex-start;
         align-items: center;
         flex-direction: row;
         padding: 5px 0;
+    }
 
-        &-input {
-            margin-right: 5px;
-            padding: 3px 8px;
-            width: 100%;
-            height: 22px;
+    &__input {
+        margin-right: 5px;
+        padding: 3px 8px;
+        width: 100%;
+        height: 22px;
+    }
+
+    &__list-message {
+        margin: 25px 0;
+
+        p {
+            margin: 0;
+            color: $color-font-secondary;
+            text-align: center;
         }
     }
 }
 
-.tasks-none {
-    margin: 25px 0;
+.c-draggable-list {
+    padding: 0;
+    list-style: none;
 
-    p {
-        margin: 0;
-        color: $color-font-secondary;
-        text-align: center;
+    &__item {
+        display: block;
+        margin: 5px 0 0;
     }
 }
 
-ul {
-    padding: 0;
-    list-style: none;
-}
-
-li {
-    display: block;
-    margin: 5px 0 0;
-}
-
-.ghost {
+.h-ghost {
     opacity: 0.5;
 }
 </style>

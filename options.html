@@ -14,46 +14,46 @@
     <hr>
 
     <main>
-        <div class="main-options">
-            <div class="fieldset">
-                <div class="fieldset-header">Task actions</div>
-                <div class="fieldset-item">
-                    <label>
-                        <input type="checkbox" id="quick-delete">
-                        <span>Quick delete</span>
+        <section>
+            <div class="l-fieldset">
+                <div class="l-fieldset__header">Task actions</div>
+                <div class="c-field">
+                    <label class="c-field__label">
+                        <input id="option-quick-delete" type="checkbox">
+                        <span class="c-field__text">Quick delete</span>
                     </label>
-                    <p>Shows a delete button in action bar when hovering over a task.</p>
+                    <p class="c-field__description">Shows a delete button in action bar when hovering over a task.</p>
                 </div>
             </div>
 
-            <div class="fieldset">
-                <div class="fieldset-header">Export & Import</div>
-                <div class="fieldset-item">
-                    <label>
-                        <input type="checkbox" id="import-duplicate">
-                        <span>Import duplicate tasks</span>
+            <div class="l-fieldset">
+                <div class="l-fieldset__header">Export & Import</div>
+                <div class="c-field">
+                    <label class="c-field__label">
+                        <input id="option-import-duplicate" type="checkbox">
+                        <span class="c-field__text">Import duplicate tasks</span>
                     </label>
-                    <p>Creates new task items instead of updating existing ones.</p>
+                    <p class="c-field__description">Creates new task items instead of updating existing ones.</p>
                 </div>
             </div>
         
-            <button id="save" class="button button-save">Save</button>
+            <button class="c-button c-button--save js-save">Save</button>
 
-            <div id="status" class="status-box"></div>
-        </div>
+            <div id="status-options" class="c-status"></div>
+        </section>
 
         <hr>
 
-        <div class="main-actions">
-            <button id="export" class="button button-big">Export tasks</button>
-            <button id="import" class="button button-big">Import tasks...</button>
+        <section>
+            <button class="c-button c-button--big js-export">Export tasks</button>
+            <button class="c-button c-button--big js-import">Import tasks...</button>
 
-            <div class="hidden">
-                <input id="import-file" type="file" accept="application/json">
+            <div class="h-hidden">
+                <input class="js-import-file" type="file" accept="application/json">
             </div>
 
-            <div id="status-file" class="status-box"></div>
-        </div>
+            <div id="status-tasks" class="c-status"></div>
+        </section>
     </main>
 
     <script src="dist/js/options.js"></script>

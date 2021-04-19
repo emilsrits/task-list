@@ -1,12 +1,10 @@
 import { default as db } from '@api/db';
 import { default as message } from './message';
 
-const ID_IMPORT_FILE = 'import-file';
-const ID_STATUS_FILE = 'status-file';
-
 const THROW_INVALID_CONTENT_TYPE = 'Invalid file content type.';
 const THROW_INVALID_CONTENT = 'Invalid file content.';
 const THROW_IMPORT_FAILED = 'Import failed.';
+const STATUS_ID = 'status-tasks';
 
 export const exportTasks = () => {
     db.getAllTasks()
@@ -34,7 +32,7 @@ export const exportTasks = () => {
 };
 
 export const startTaskImport = () => {
-    const input = document.getElementById(ID_IMPORT_FILE);
+    const input = document.querySelector('.js-import-file');
 
     input.value = '';
     input.click();
@@ -61,7 +59,7 @@ export const handleTaskImport = (event) => {
             }
 
             db.addTasks(tasks)
-                .then(() => message(ID_STATUS_FILE, 'Imported successfully'))
+                .then(() => message(STATUS_ID, 'Imported successfully'))
                 .catch(() => window.alert(THROW_IMPORT_FAILED));
         } catch (e) {
             window.alert(e);

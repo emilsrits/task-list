@@ -1,5 +1,5 @@
 export default (id, message) => {
-    const CLASS_VISIBLE = 'is-visible';
+    const CLASS_VISIBLE = 'c-status--visible';
 
     const status = document.getElementById(id);
 

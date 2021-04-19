@@ -1,4 +1,4 @@
-.button {
+.c-button {
     padding: 8px;
     color: $color-white;
     font-size: 12px;
@@ -10,16 +10,16 @@
     &:hover {
         box-shadow: $box-shadow-inset #585858;
     }
-}
 
-.button-add {
-    background-color: $color-green;
-}
-
-.button-edit {
-    background-color: $color-blue;
-}
-
-.button-delete {
-    background-color: $color-red;
+    &--add {
+        background-color: $color-green;
+    }
+    
+    &--edit {
+        background-color: $color-blue;
+    }
+    
+    &--delete {
+        background-color: $color-red;
+    }
 }

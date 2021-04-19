@@ -19,12 +19,21 @@ textarea {
     resize: vertical;
 }
 
-.checkbox {
+.c-checkbox {
     width: 20px;
     position: relative;
     margin: 5px auto;
 
-    label {
+    &__input {
+        visibility: hidden;
+
+        &:checked + .c-checkbox__label::after {
+            border-color: $color-green;
+            opacity: 1;
+        }
+    }
+
+    &__label {
         position: absolute;
         top: 0;
         left: 0;
@@ -35,7 +44,7 @@ textarea {
         background: linear-gradient(to bottom right, #484646, #1f1c1c);
         box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(31, 29, 29, 0.4);
 
-        &:after {
+        &::after {
             content: '';
             position: absolute;
             top: 4px;
@@ -53,23 +62,5 @@ textarea {
         &:hover::after {
             opacity: 0.3;
         }
-    }
-
-    input[type=checkbox] {
-        visibility: hidden;
-
-        &:checked + label:after {
-            border-color: $color-green;
-            opacity: 1;
-        }
-    }
-}
-
-.input-group {
-    display: flex;
-    flex-wrap: wrap;
-
-    > *:not(:first-of-type) {
-        margin-left: 10px;
     }
 }

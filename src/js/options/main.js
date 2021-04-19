@@ -1,9 +1,9 @@
 import { CONFIG } from '@config/const';
 import { default as message } from './message';
 
-const ID_QUICK_DELETE = 'quick-delete';
-const ID_IMPORT_DUPLICATE = 'import-duplicate';
-const ID_STATUS = 'status';
+const ID_QUICK_DELETE = 'option-quick-delete';
+const ID_IMPORT_DUPLICATE = 'option-import-duplicate';
+const STATUS_ID = 'status-options';
 
 export const saveOptions = () => {
     const valueQuickDelete = document.getElementById(ID_QUICK_DELETE).checked;
@@ -14,7 +14,7 @@ export const saveOptions = () => {
             [CONFIG.OPTIONS.NAMES.QUICK_DELETE]: valueQuickDelete,
             [CONFIG.OPTIONS.NAMES.IMPORT_DUPLICATE]: valueImportDuplicate
         },
-        message(ID_STATUS, 'Options saved')
+        message(STATUS_ID, 'Options saved')
     );
 };
 

@@ -1,5 +1,5 @@
 <template>
-    <div :class="['container', { 'menu-open': isMenuOpen }]">
+    <div :class="['l-container', { 'h-menu-is-open': isMenuOpen }]">
         <component :is="currentTab"></component>
     </div>
 </template>
@@ -42,13 +42,13 @@ export default {
 <style lang="scss" scoped>
 @import '@styles/_variables.scss';
 
-.container {
+.l-container {
     padding: 10px 14px;
     min-width: 520px;
     max-width: 520px;
     background: $color-background;
 
-    &.menu-open {
+    &.h-menu-is-open {
         min-height: 160px;
     }
 }
