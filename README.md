@@ -25,7 +25,13 @@ Possible future features:
 
 1. Navigate to `chrome://extensions/`
 2. Enable "Developer mode"
-3. Click on "Load unpacked" and select the directory which contains the extensions manifest file (root of this repo)
+3. Click on "Load unpacked" and select the directory which contains the extensions manifest file
+
+## Adding extension to Edge
+
+1. Navigate to `edge://extensions/`
+2. Enable "Developer mode"
+3. Click on "Load unpacked" and select the directory which contains the extensions manifest file
 
 ## Adding extension to Firefox
 
