@@ -4,7 +4,7 @@
         @change="handleInputChange"
         class="c-form"
     >
-        <span class="c-form__label">Title</span>
+        <span class="c-form__label">{{ $t('task_edit.title') }}</span>
         <input
             ref="title"
             type="text"
@@ -15,7 +15,7 @@
             spellcheck="false"
         />
 
-        <span class="c-form__label">Date</span>
+        <span class="c-form__label">{{ $t('task_edit.date') }}</span>
         <div class="c-form__group">
             <input
                 ref="date"
@@ -32,7 +32,7 @@
             />
         </div>
 
-        <span class="c-form__label">Description</span>
+        <span class="c-form__label">{{ $t('task_edit.description') }}</span>
         <textarea
             ref="description"
             class="c-form__text"
@@ -44,7 +44,7 @@
             spellcheck="false"
         ></textarea>
 
-        <span class="c-form__label">Color label</span>
+        <span class="c-form__label">{{ $t('task_edit.color_label') }}</span>
         <color-picker
             :active-color="taskActiveColor"
             @colorPicked="handleColorPicked"

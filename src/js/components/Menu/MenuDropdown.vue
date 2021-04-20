@@ -5,7 +5,7 @@
         </div>
 
         <ul v-if="isMenuOpen" class="c-menu__list">
-            <li @click="handleMenuOptions">Options</li>
+            <li @click="handleMenuOptions">{{ $t('menu.options') }}</li>
         </ul>
 
         <div 

@@ -1,0 +1,11 @@
+{
+  "menu": {
+    "options": "Options"
+  },
+  "task_edit": {
+    "title": "Title",
+    "date": "Date",
+    "description": "Description",
+    "color_label": "Color label"
+  }
+}

@@ -15,6 +15,7 @@ mix.webpackConfig({
             '@api': path.resolve(__dirname, src_path + '/js/api'),
             '@components': path.resolve(__dirname, src_path + '/js/components'),
             '@config': path.resolve(__dirname, src_path + '/js/config'),
+            '@lang': path.resolve(__dirname, src_path + '/js/lang'),
             '@store': path.resolve(__dirname, src_path + '/js/store'),
             '@utils': path.resolve(__dirname, src_path + '/js/utils'),
             '@styles': path.resolve(__dirname, src_path + '/sass')
