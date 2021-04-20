@@ -7,5 +7,22 @@
     "date": "Date",
     "description": "Description",
     "color_label": "Color label"
+  },
+  "options": {
+    "header_title": "Task List options",
+    "task_actions": "Task actions",
+    "quick_delete": "Quick delete",
+    "quick_delete_desc": "Shows a delete button in action bar when hovering over a task.",
+    "export_and_import": "Export & Import",
+    "import_duplicate": "Import duplicate tasks",
+    "import_duplicate_desc": "Creates new task items instead of updating existing ones.",
+    "save": "Save",
+    "options_saved": "Options saved",
+    "export_tasks": "Export tasks",
+    "import_tasks": "Import tasks...",
+    "invalid_content_type": "Invalid file content type",
+    "invalid_content": "Invalid file content",
+    "import_failed": "Import failed",
+    "import_success": "Imported successfully"
   }
 }

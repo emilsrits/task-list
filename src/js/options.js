@@ -1,9 +1,11 @@
-import { saveOptions, restoreOptions } from './options/main';
-import { exportTasks, startTaskImport, handleTaskImport } from './options/export-import';
+import Vue from 'vue';
+import Options from '@components/Options.vue';
+import i18n from '@lang/i18n';
 
-document.addEventListener('DOMContentLoaded', restoreOptions);
-document.querySelector('.js-save').addEventListener('click', saveOptions);
+Vue.config.productionTip = false;
+Vue.config.devtools = false;
 
-document.querySelector('.js-export').addEventListener('click', exportTasks);
-document.querySelector('.js-import').addEventListener('click', startTaskImport);
-document.querySelector('.js-import-file').addEventListener('change', handleTaskImport);
+new Vue({
+    i18n,
+    render: h => h(Options)
+}).$mount('#options');

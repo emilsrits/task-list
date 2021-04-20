@@ -7,54 +7,7 @@
     <link rel="stylesheet" href="dist/css/options.css">
 </head>
 <body>
-    <header>
-        <h1>Task List options</h1>
-    </header>
-
-    <hr>
-
-    <main>
-        <section>
-            <div class="l-fieldset">
-                <div class="l-fieldset__header">Task actions</div>
-                <div class="c-field">
-                    <label class="c-field__label">
-                        <input id="option-quick-delete" type="checkbox">
-                        <span class="c-field__text">Quick delete</span>
-                    </label>
-                    <p class="c-field__description">Shows a delete button in action bar when hovering over a task.</p>
-                </div>
-            </div>
-
-            <div class="l-fieldset">
-                <div class="l-fieldset__header">Export & Import</div>
-                <div class="c-field">
-                    <label class="c-field__label">
-                        <input id="option-import-duplicate" type="checkbox">
-                        <span class="c-field__text">Import duplicate tasks</span>
-                    </label>
-                    <p class="c-field__description">Creates new task items instead of updating existing ones.</p>
-                </div>
-            </div>
-        
-            <button class="c-button c-button--save js-save">Save</button>
-
-            <div id="status-options" class="c-status"></div>
-        </section>
-
-        <hr>
-
-        <section>
-            <button class="c-button c-button--big js-export">Export tasks</button>
-            <button class="c-button c-button--big js-import">Import tasks...</button>
-
-            <div class="h-hidden">
-                <input class="js-import-file" type="file" accept="application/json">
-            </div>
-
-            <div id="status-tasks" class="c-status"></div>
-        </section>
-    </main>
+    <div id="options"></div>
 
     <script src="dist/js/options.js"></script>
 </body>

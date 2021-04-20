@@ -1,15 +1,5 @@
-.c-status {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    display: none;
-
-    &--visible {
-        display: inline-flex;
-        padding: 10px;
-        border: 1px solid $color-black;
-        background: $color-blue;
-    }
+.l-container {
+    position: relative;
 }
 
 .l-fieldset {
