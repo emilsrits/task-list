@@ -1,6 +1,6 @@
 {
-    "/dist/js/app.js": "/dist/js/app.js",
-    "/dist/css/app.css": "/dist/css/app.css",
-    "/dist/css/options.css": "/dist/css/options.css",
-    "/dist/js/options.js": "/dist/js/options.js"
+    "/src/assets/js/app.js": "/src/assets/js/app.js",
+    "/src/assets/css/app.css": "/src/assets/css/app.css",
+    "/src/assets/css/options.css": "/src/assets/css/options.css",
+    "/src/assets/js/options.js": "/src/assets/js/options.js"
 }

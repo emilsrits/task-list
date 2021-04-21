@@ -6,11 +6,11 @@
   "manifest_version": 3,
 
   "icons": {
-    "48": "dist/icons/icon-48.png"
+    "48": "assets/icons/icon-48.png"
   },
 
   "action": {
-    "default_icon": "dist/icons/icon-48.png",
+    "default_icon": "assets/icons/icon-48.png",
     "default_title": "Task List",
     "default_popup": "app.html"
   },

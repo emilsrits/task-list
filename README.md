@@ -14,12 +14,16 @@ Possible future features:
 - Repeatable tasks, e.g. daily / weekly / custom date
 - Theme selection dark/light or own custom color theme
 
-# Installation / Setup
+# Setup
 
 ## Compiling assets
 
 1. Install dependencies `npm install`
 2. Run `npm run production` or `npm run dev`, `npm run watch`
+
+# Installation
+
+For development load the extension from `./src` directory.
 
 ## Adding extension to Chrome
 

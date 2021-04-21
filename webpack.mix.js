@@ -23,7 +23,7 @@ mix.webpackConfig({
     }
 });
 
-mix.js('src/js/app.js', 'dist/js/')
-    .js('src/js/options.js', 'dist/js/options.js')
-    .sass('src/sass/app.scss', 'dist/css/app.css')
-    .sass('src/sass/options.scss', 'dist/css/options.css');
+mix.js('src/js/app.js', 'src/assets/js/app.js')
+    .js('src/js/options.js', 'src/assets/js/options.js')
+    .sass('src/sass/app.scss', 'src/assets/css/app.css')
+    .sass('src/sass/options.scss', 'src/assets/css/options.css');
