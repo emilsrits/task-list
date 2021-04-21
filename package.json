@@ -2,12 +2,15 @@
   "name": "task-list",
   "version": "1.0.0",
   "description": "Task list extension for Chromium and Firefox browsers",
-  "main": "app.js",
+  "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "watch": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "hot": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "start:firefox": "web-ext run --source-dir ./src/",
+    "start:chrome": "web-ext run --source-dir ./src/ --target chromium",
+    "build": "npm run production && web-ext --config=web-ext-config.js --artifacts-dir ./dist/ build"
   },
   "repository": {
     "type": "git",
@@ -15,7 +18,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/emilsrits/task-list/issues"
   },
@@ -26,7 +29,8 @@
     "normalize.css": "^8.0.1",
     "resolve-url-loader": "^3.1.2",
     "sass": "^1.26.11",
-    "sass-loader": "^7.3.1"
+    "sass-loader": "^7.3.1",
+    "web-ext": "^6.1.0"
   },
   "dependencies": {
     "idb": "^4.0.4",
