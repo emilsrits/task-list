@@ -46,7 +46,6 @@ export default {
     padding: 10px 14px;
     min-width: 520px;
     max-width: 520px;
-    background: $color-background;
 
     &.h-menu-is-open {
         min-height: 160px;
