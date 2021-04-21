@@ -3,13 +3,13 @@
   "name": "Task List",
   "version": "1.0",
   "description": "A simple task list extension",
-  "manifest_version": 3,
+  "manifest_version": 2,
 
   "icons": {
     "48": "assets/icons/icon-48.png"
   },
 
-  "action": {
+  "browser_action": {
     "default_icon": "assets/icons/icon-48.png",
     "default_title": "Task List",
     "default_popup": "app.html"
@@ -23,9 +23,7 @@
 
   "permissions": ["storage", "unlimitedStorage"],
 
-  "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self';"
-  },
+  "content_security_policy": "script-src 'self'; object-src 'self';",
 
   "browser_specific_settings": {
     "gecko": {
