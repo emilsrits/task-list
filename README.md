@@ -14,6 +14,8 @@ Possible future features:
 - Repeatable tasks, e.g. daily / weekly / custom date
 - Theme selection dark/light or own custom color theme
 
+___
+
 # Setup
 
 ## Compiling assets
@@ -23,7 +25,7 @@ Possible future features:
 
 # Installation
 
-For development load the extension from `./src` directory.
+For development load the extension from `./src` directory. Otherwise load a build from [#build](#build-a-zip) command.
 
 ## Adding extension to Chrome
 
@@ -42,3 +44,16 @@ For development load the extension from `./src` directory.
 1. Navigate to `about:debugging`
 2. Click on "This Firefox"
 3. Click on "Load Temporary Add-on" and select manifest file inside extensions root directory
+
+___
+
+# Build a zip
+
+Run `npm run build`, which creates a **.zip** file under **dist** directory. 
+
+This zip will only contain the necessary files for the extension.
+
+# Headless mode
+
+- `npm run start:firefox` for quick testing in Firefox
+- `npm run start:chrome` for quick testing in Chrome
