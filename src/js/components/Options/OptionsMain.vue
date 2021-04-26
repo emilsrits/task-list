@@ -57,7 +57,9 @@ export default {
                     [CONFIG.OPTIONS.NAMES.QUICK_DELETE]: this.optQuickDelete,
                     [CONFIG.OPTIONS.NAMES.IMPORT_DUPLICATE]: this.optImportDuplicate
                 },
-                this.$emit('savedOptions', this.$t('options.options_saved'))
+                () => {
+                    this.$emit('savedOptions', this.$t('options.options_saved'))
+                }
             );
         },
 
