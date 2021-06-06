@@ -35,7 +35,7 @@ export const CONFIG = {
     },
     INPUT_VALIDATE: {
         TITLE: {
-            max: 60
+            max: 80
         },
         DESCRIPTION: {
             max: 280
