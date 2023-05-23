@@ -230,6 +230,13 @@ export default {
         margin: 0;
         width: 100%;
         overflow-wrap: break-word;
+
+        ::v-deep  {
+            a {
+                word-break: break-word;
+            }
+        }
+
     }
 
     &__description {
